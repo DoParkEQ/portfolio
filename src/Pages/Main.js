@@ -66,11 +66,15 @@ const MenuItem = styled(NavLink)`
   }
 `;
 
-const Footer = styled.div`
+const Footer = styled.footer`
   margin: 32px 8px;
   display: flex;
   align-items: center;
   width: 100%;
+    p {
+      color: rgba(0,0,0,0.6);
+      font-size: 12px;
+    }
     .favicon {
       margin-left: 8px;
     }
@@ -85,7 +89,6 @@ const Footer = styled.div`
       box-shadow: 0px 1px 4px rgba(12, 12, 13, 0.1);
     }
   }
-  
 `
 
 const Main = () => {
@@ -121,14 +124,18 @@ const Main = () => {
       <Container>
         <Footer>
           <div className='copyright'>
-            <p>© 2020 Do Park.</p>
+            <p>Designed and built by Do Park.<br/>© 2020</p>
           </div>
+          <a href='https://www.linkedin.com/in/do-park/'>
           <div className='favicon'>
             <img src={linkedinIcon} alt="linkedin" />
           </div>
+          </a>
+          <a href='https://github.com/DoParkEQ'>
           <div className='favicon'> 
             <img src={githubIcon} alt="github" />
           </div>   
+          </a>
         </Footer>
       </Container>
     </div>

@@ -13,7 +13,7 @@ const Gallery = styled.div`
   .item {
     border-radius: 10px;
     margin: 8px 8px;
-    height: 250px;
+    height: 234px;
     box-sizing: border-box;
     flex: 1 1 32%;
     background: #e5e5e5;
