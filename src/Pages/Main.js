@@ -5,123 +5,132 @@ import { Route, Link, Switch, NavLink } from "react-router-dom";
 import linkedinIcon from "../Assets/Icons/linkedin.svg";
 import githubIcon from "../Assets/Icons/github.svg";
 import logo from "../Assets/Images/logo.png";
+import { createUseStyles, withStyles } from "react-jss";
 
-const Container = styled.div`
-  display: flex;
-  margin: 20px 60px;
-`;
-
-const Header = styled.div`
-  margin: 0px 8px;
-  img {
-    width: 40px;
-    height: 40px;
-  }
-`;
-
-const Navigation = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin: 32px 8px;
-  .logo {
-    margin: 0px 0px;
-    width: 100%;
-    font-weight: 800;
-    background: linear-gradient(
-        217deg,
-        rgba(255, 214, 166, 0.8),
-        rgba(255, 0, 0, 0) 70.71%
-      ),
-      linear-gradient(
-        127deg,
-        rgba(167, 153, 255, 0.8),
-        rgba(0, 255, 0, 0) 70.71%
-      ),
-      linear-gradient(
-        336deg,
-        rgba(152, 218, 255, 0.8),
-        rgba(0, 0, 255, 0) 70.71%
-      );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-`;
-
-const MenuItem = styled(NavLink)`
-  display: block;
-  text-align: right;
-  color: rgba(0, 0, 0, 0.5);
-  text-decoration: none;
-  :hover {
-    color: rgba(0, 0, 0, 0.7);
-  }
-  &.active {
-    font-weight: 600;
-    color: rgba(0, 94, 128, 0.8);
-  }
-`;
-
-const Footer = styled.footer`
-  margin: 32px 8px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-    p {
-      color: rgba(0,0,0,0.6);
-      font-size: 12px;
-    }
-    .favicon {
-      margin-left: 8px;
-    }
-    
-    .copyright{
-      margin-right: auto;
-    }
-
-    img {
-      width: 32px;
-      height: 32px;
-      box-shadow: 0px 1px 4px rgba(12, 12, 13, 0.1);
-    }
-  }
-`;
+const useStyles = createUseStyles((theme) => ({
+  root: {},
+  header: {
+    margin: "0px 8px",
+    "& img": {
+      width: 40,
+      height: 40,
+    },
+  },
+  container: {
+    display: "flex",
+    margin: "20px 60px",
+  },
+  navigation: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    margin: "32px 8px",
+    "& h3": {
+      margin: "0px 0px",
+      width: "100%",
+      fontWeight: 800,
+      background: `linear-gradient(
+          217deg,
+          rgba(255, 214, 166, 0.8),
+          rgba(255, 0, 0, 0) 70.71%
+        ),
+        linear-gradient(
+          127deg,
+          rgba(167, 153, 255, 0.8),
+          rgba(0, 255, 0, 0) 70.71%
+        ),
+        linear-gradient(
+          336deg,
+          rgba(152, 218, 255, 0.8),
+          rgba(0, 0, 255, 0) 70.71%
+        )`,
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
+    },
+    "& .navlinks": {
+      "& a": {
+        ...theme.typography.subtitle,
+        display: "block",
+        textAlign: "right",
+        color: "rgba(0, 0, 0, 0.5)",
+        textDecoration: "none",
+        "&:hover": {
+          color: "rgba(0, 0, 0, 0.7)",
+        },
+        "&.active": {
+          fontWeight: 600,
+          color: "rgba(0, 94, 128, 0.8)",
+        },
+      },
+    },
+  },
+  footer: {
+    margin: "32px 8px",
+    display: "flex",
+    alignItems: "center",
+    width: "100%",
+    "& p": {
+      ...theme.typography.caption,
+      color: "rgba(0,0,0,0.6)",
+    },
+    "& .favicon": {
+      marginLeft: 8,
+    },
+    "& .copyright": {
+      marginRight: "auto",
+    },
+    "& img": {
+      width: 32,
+      height: 32,
+      boxShadow: "0px 1px 4px rgba(12, 12, 13, 0.1)",
+    },
+  },
+}));
 
 const Main = () => {
+  const classes = useStyles();
   return (
     <div>
-      <Container>
-        <Header>
+      <div className={classes.container}>
+        <div className={classes.header}>
           <img src={logo} alt="logo" />
-        </Header>
-      </Container>
-      <Container>
-        <Navigation>
-          <div>
-            <h3 className="logo">Do Park.</h3>
+        </div>
+      </div>
+      <div className={classes.container}>
+        <div className={classes.navigation}>
+          <div className="logo">
+            <h3>Do Park.</h3>
           </div>
-          <div>
-            <MenuItem to="/work" activeClassName="active">
+          <div className="navlinks">
+            <NavLink className="navlink" to="/work" activeClassName="active">
               Work
-            </MenuItem>
-            <MenuItem to="/side-project" activeClassName="active">
+            </NavLink>
+            <NavLink
+              className="navlink"
+              to="/side-project"
+              activeClassName="active"
+            >
               Side projects
-            </MenuItem>
-            <MenuItem to="/thoughts" activeClassName="active">
+            </NavLink>
+            <NavLink
+              className="navlink"
+              to="/thoughts"
+              activeClassName="active"
+            >
               Thoughts
-            </MenuItem>
+            </NavLink>
           </div>
-        </Navigation>
-      </Container>
-      <Container>
+        </div>
+      </div>
+      <div className={classes.container}>
         <Route path="/work" component={WorkSection} />
         <Route path="/side-project" component={SideProjectSection} />
-      </Container>
-      <Container>
-        <Footer>
+      </div>
+      <div className={classes.container}>
+        <div className={classes.footer}>
           <div className="copyright">
             <p>
-              Designed and built by Do Park.
+              🖍️ and 👨‍💻 by Do Park
               <br />© 2020
             </p>
           </div>
@@ -135,8 +144,8 @@ const Main = () => {
               <img src={githubIcon} alt="github" />
             </div>
           </a>
-        </Footer>
-      </Container>
+        </div>
+      </div>
     </div>
   );
 };
