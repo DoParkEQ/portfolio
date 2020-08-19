@@ -37,7 +37,9 @@ p {
 }
 
 body {
-  margin: 0;
+  background: #FAFAFA;
+  max-width: 1440px;
+  margin: 0 auto;
   font-family: 'Martel', 'Open Sans', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -1,33 +1,27 @@
 import React from "react";
 import styled from "styled-components";
-import logo from '../Assets/temp_logo.png';
+import { WorkSection, SideProjectSection } from "./index";
+//import Work from "./Work";
+//import SideProject from "./SideProject";
+import { Route, Link, Switch, NavLink } from "react-router-dom";
+// import linkedinIcon from "../Assets/icon_linkedin.png";
+// import githubIcon from "../Assets/icon_github.png";
+import linkedinIcon from "../Assets/linkedin.svg";
+import githubIcon from "../Assets/github.svg";
+import logo from "../Assets/temp_logo.png";
 
 const Container = styled.div`
   display: flex;
   margin: 20px 60px;
 `;
 
-const Gallery = styled.div`
-  width: 100%;
-  display: flex;
-  
-  .item {
-    border-radius: 10px;
-    margin: 0px 8px;
-    height: 500px;
-    /* box-sizing: border-box; */
-    flex: 1;
-    background: #e5e5e5;
+const Header = styled.div`
+  margin: 0px 8px;
+  img {
+    width: 40px;
+    height: 40px;
   }
 `;
-
-const Header = styled.div`
-    margin: 0px 8px;
-    img {
-        width: 64px;
-        height: 64px;
-    }
-`
 
 const Navigation = styled.div`
   display: flex;
@@ -43,44 +37,106 @@ const Navigation = styled.div`
         rgba(255, 214, 166, 0.8),
         rgba(255, 0, 0, 0) 70.71%
       ),
-      linear-gradient(127deg, rgba(167, 153, 255, 0.8), rgba(0, 255, 0, 0) 70.71%),
-      linear-gradient(336deg, rgba(152, 218, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
+      linear-gradient(
+        127deg,
+        rgba(167, 153, 255, 0.8),
+        rgba(0, 255, 0, 0) 70.71%
+      ),
+      linear-gradient(
+        336deg,
+        rgba(152, 218, 255, 0.8),
+        rgba(0, 0, 255, 0) 70.71%
+      );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+`;
 
-  .navlink {
-    margin: 0px;
-    text-align: right;
+const MenuItem = styled(NavLink)`
+  display: block;
+  text-align: right;
+  color: rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  :hover {
+    color: rgba(0, 0, 0, 0.7);
+  }
+  &.active {
+    font-weight: 600;
+    color: rgba(0, 94, 128, 0.8);
   }
 `;
+
+const Footer = styled.footer`
+  margin: 32px 8px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+    p {
+      color: rgba(0,0,0,0.6);
+      font-size: 12px;
+    }
+    .favicon {
+      margin-left: 8px;
+    }
+    
+    .copyright{
+      margin-right: auto;
+    }
+
+    img {
+      width: 32px;
+      height: 32px;
+      box-shadow: 0px 1px 4px rgba(12, 12, 13, 0.1);
+    }
+  }
+`
 
 const Main = () => {
   return (
     <div>
       <Container>
-          <Header>
-              <img src={logo}/>
-          </Header>
+        <Header>
+          <img src={logo} alt="logo" />
+        </Header>
       </Container>
       <Container>
         <Navigation>
           <div>
-            <h3 className='logo'>Do Park.</h3>
+            <h3 className="logo">Do Park.</h3>
           </div>
           <div>
-            <p className="navlink">Work</p>
-            <p className="navlink">Side projects</p>
-            <p className="navlink">Thoughts</p>
+            <MenuItem to="/work" activeClassName="active">
+              Work
+            </MenuItem>
+            <MenuItem to="/side-project" activeClassName="active">
+              Side projects
+            </MenuItem>
+            <MenuItem to="/thoughts" activeClassName="active">
+              Thoughts
+            </MenuItem>
           </div>
         </Navigation>
       </Container>
       <Container>
-        <Gallery>
-          <div className="item"></div>
-          <div className="item"></div>
-          <div className="item"></div>
-        </Gallery>
+        <Route path="/work" component={WorkSection} />
+        <Route path="/side-project" component={SideProjectSection} />
+      </Container>
+      <Container>
+        <Footer>
+          <div className='copyright'>
+            <p>Designed and built by Do Park.<br/>© 2020</p>
+          </div>
+          <a href='https://www.linkedin.com/in/do-park/'>
+          <div className='favicon'>
+            <img src={linkedinIcon} alt="linkedin" />
+          </div>
+          </a>
+          <a href='https://github.com/DoParkEQ'>
+          <div className='favicon'> 
+            <img src={githubIcon} alt="github" />
+          </div>   
+          </a>
+        </Footer>
       </Container>
     </div>
   );
