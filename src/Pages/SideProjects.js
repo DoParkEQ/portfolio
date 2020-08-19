@@ -33,7 +33,7 @@ const useStyles = createUseStyles((theme) => ({
   },
 }));
 
-const SideProject = () => {
+const SideProjects = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -56,4 +56,4 @@ const SideProject = () => {
   );
 };
 
-export default SideProject;
+export default SideProjects;

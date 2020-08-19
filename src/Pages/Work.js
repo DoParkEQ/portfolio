@@ -1,5 +1,7 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
+import { Route, Link } from "react-router-dom";
+import { ProjectPage } from "./index";
 
 const useStyles = createUseStyles((theme) => ({
   root: {
@@ -36,15 +38,28 @@ const Work = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <div className="itemContainer">
-        <div className="item"></div>
-      </div>
-      <div className="itemContainer">
-        <div className="item"></div>
-      </div>
-      <div className="itemContainer">
-        <div className="item"></div>
-      </div>
+      
+        <div className="itemContainer">
+          <div className="item">
+            <Link to='/work/item1'></Link>
+          </div>
+        </div>
+      
+     
+        <div className="itemContainer">
+          <div className="item">
+          <Link to='/work/item2'></Link>
+          </div>
+        </div>
+     
+   
+        <div className="itemContainer">
+          <div className="item">
+          <Link to='/work/item3'></Link>
+          </div>
+        </div>
+      
+      <Route path="/work/:pagename" component={ProjectPage} />
     </div>
   );
 };
