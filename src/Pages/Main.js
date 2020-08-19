@@ -1,14 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { WorkSection, SideProjectSection } from "./index";
-//import Work from "./Work";
-//import SideProject from "./SideProject";
 import { Route, Link, Switch, NavLink } from "react-router-dom";
-// import linkedinIcon from "../Assets/icon_linkedin.png";
-// import githubIcon from "../Assets/icon_github.png";
-import linkedinIcon from "../Assets/linkedin.svg";
-import githubIcon from "../Assets/github.svg";
-import logo from "../Assets/temp_logo.png";
+import linkedinIcon from "../Assets/Icons/linkedin.svg";
+import githubIcon from "../Assets/Icons/github.svg";
+import logo from "../Assets/Images/logo.png";
 
 const Container = styled.div`
   display: flex;
@@ -89,7 +85,7 @@ const Footer = styled.footer`
       box-shadow: 0px 1px 4px rgba(12, 12, 13, 0.1);
     }
   }
-`
+`;
 
 const Main = () => {
   return (
@@ -123,18 +119,21 @@ const Main = () => {
       </Container>
       <Container>
         <Footer>
-          <div className='copyright'>
-            <p>Designed and built by Do Park.<br/>© 2020</p>
+          <div className="copyright">
+            <p>
+              Designed and built by Do Park.
+              <br />© 2020
+            </p>
           </div>
-          <a href='https://www.linkedin.com/in/do-park/'>
-          <div className='favicon'>
-            <img src={linkedinIcon} alt="linkedin" />
-          </div>
+          <a href="https://www.linkedin.com/in/do-park/">
+            <div className="favicon">
+              <img src={linkedinIcon} alt="linkedin" />
+            </div>
           </a>
-          <a href='https://github.com/DoParkEQ'>
-          <div className='favicon'> 
-            <img src={githubIcon} alt="github" />
-          </div>   
+          <a href="https://github.com/DoParkEQ">
+            <div className="favicon">
+              <img src={githubIcon} alt="github" />
+            </div>
           </a>
         </Footer>
       </Container>

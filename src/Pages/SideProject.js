@@ -1,66 +1,59 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import { createUseStyles } from "react-jss";
 
-const Gallery = styled.div`
-  width: 100%;
-  display: flex;
-  flex-flow: row wrap;
+const useStyles = createUseStyles((theme) => ({
+  root: {
+    width: "100%",
+    display: "flex",
+    flexWrap: "wrap",
 
-  .break {
-      width: 100%;
-      border: none;
-  }
-  .item {
-    border-radius: 10px;
-    margin: 8px 8px;
-    height: 234px;
-    box-sizing: border-box;
-    flex: 1 1 32%;
-    background: #e5e5e5;
-    box-shadow: 0px 1px 4px rgba(12, 12, 13, 0.1);
-    transition: all 0.4s;
-    
-    :hover {
-      box-shadow: 0px 4px 12px rgba(12, 12, 13, 0.2);
-    }
-  }
-
-  /* div:nth-child(1) {
-    flex: 1;
-  }
-
-  div:nth-child(2) {
-    flex: 1;
-  }
-
-  div:nth-child(3) {
-    flex: 5;
-  }
-
-  div:nth-child(5) {
-    flex: 6;
-  }
-
-  div:nth-child(6) {
-    flex: 6;
-  }  */
-  @media screen and (max-width: 768px) {
-    .item {
-      flex: 0 0 100%;
-    }
-  }
-`;
+    "& .itemContainer": {
+      boxSizing: "border-box",
+      height: 250,
+      flex: "1 1 32%",
+      padding: "8px 8px",
+      "& .item": {
+        width: "auto",
+        height: "100%",
+        borderRadius: 10,
+        background: theme.color.secondary[100],
+        boxShadow: theme.shadow[10],
+        transition: "all 0.4s",
+        "&:hover": {
+          boxShadow: theme.shadow[30],
+          background: theme.color.secondary[50],
+        },
+      },
+    },
+    "@media screen and (max-width: 768px)": {
+      "& .itemContainer": {
+        flex: "0 0 100%",
+      },
+    },
+  },
+}));
 
 const SideProject = () => {
-    return (
-        <Gallery>
-            <div className="item"></div>
-            <div className="item"></div>
-            <div className="item"></div>
-            <div className="item"></div>
-            <div className="item"></div>
-        </Gallery>
-    );
+  const classes = useStyles();
+  return (
+    <div className={classes.root}>
+      <div className="itemContainer">
+        <div className="item"></div>
+      </div>
+      <div className="itemContainer">
+        <div className="item"></div>
+      </div>
+      <div className="itemContainer">
+        <div className="item"></div>
+      </div>
+      <div className="itemContainer">
+        <div className="item"></div>
+      </div>
+      <div className="itemContainer">
+        <div className="item"></div>
+      </div>
+    </div>
+  );
 };
 
 export default SideProject;

@@ -1,5 +1,5 @@
 @import url(//fonts.googleapis.com/css2?family=Martel:wght@300;400;600;700;800&display=swap);
-@import url(//fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap);
+@import url(//fonts.googleapis.com/css2?family=Open + Sans:wght@300;400;600;700&display=swap);
 
 h1 {
   font-size: 96px;
@@ -37,15 +37,15 @@ p {
 }
 
 body {
-  background: #FAFAFA;
+  background: #fafafa;
   max-width: 1440px;
   margin: 0 auto;
-  font-family: 'Martel', 'Open Sans', serif;
+  font-family: "Martel", "Open Sans", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
