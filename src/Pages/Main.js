@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { WorkSection, SideProjectSection } from "./index";
-import { Route, Link, Switch, NavLink } from "react-router-dom";
+import { WorkSection, SideProjectSection, ProjectPage } from "./index";
+import { Route, Link, Switch, NavLink, useLocation } from "react-router-dom";
 import linkedinIcon from "../Assets/Icons/linkedin.svg";
 import githubIcon from "../Assets/Icons/github.svg";
 import logo from "../Assets/Images/logo.png";
-import { createUseStyles, withStyles } from "react-jss";
+import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles((theme) => ({
   root: {},
@@ -18,7 +18,7 @@ const useStyles = createUseStyles((theme) => ({
   },
   container: {
     display: "flex",
-    margin: "20px 60px",
+    margin: "20px 16px",
   },
   navigation: {
     display: "flex",
@@ -87,8 +87,14 @@ const useStyles = createUseStyles((theme) => ({
   },
 }));
 
+const showNavbar = (pathname) => {
+  const paths = ['/','/work','/side-project','/thoughts']
+  return paths.includes(pathname);
+}
+
 const Main = () => {
   const classes = useStyles();
+  const { pathname } = useLocation();
   return (
     <div>
       <div className={classes.container}>
@@ -96,35 +102,42 @@ const Main = () => {
           <img src={logo} alt="logo" />
         </div>
       </div>
-      <div className={classes.container}>
-        <div className={classes.navigation}>
-          <div className="logo">
-            <h3>Do Park.</h3>
-          </div>
-          <div className="navlinks">
-            <NavLink className="navlink" to="/work" activeClassName="active">
-              Work
-            </NavLink>
-            <NavLink
-              className="navlink"
-              to="/side-project"
-              activeClassName="active"
-            >
-              Side projects
-            </NavLink>
-            <NavLink
-              className="navlink"
-              to="/thoughts"
-              activeClassName="active"
-            >
-              Thoughts
-            </NavLink>
+      {showNavbar(pathname) && 
+        <div className={classes.container}>
+          <div className={classes.navigation}>
+            <div className="logo">
+              <h3>Do Park.</h3>
+            </div>
+            <div className="navlinks">
+              <NavLink
+                className="navlink"
+                to="/work"
+                activeClassName="active"
+              >
+                Work
+              </NavLink>
+              <NavLink
+                className="navlink"
+                to="/side-project"
+                activeClassName="active"
+              >
+                Side projects
+              </NavLink>
+              <NavLink
+                className="navlink"
+                to="/thoughts"
+                activeClassName="active"
+              >
+                Thoughts
+              </NavLink>
+            </div>
           </div>
         </div>
-      </div>
+      }
       <div className={classes.container}>
-        <Route path="/work" component={WorkSection} />
+        <Route path={["/", "/work"]} component={WorkSection} />
         <Route path="/side-project" component={SideProjectSection} />
+        <Route path="/:project" component={ProjectPage}/>
       </div>
       <div className={classes.container}>
         <div className={classes.footer}>
