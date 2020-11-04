@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { WorkSection, SideProjectSection, ProjectPage } from "./index";
 import { Route, Link, Switch, NavLink, useLocation } from "react-router-dom";
 import linkedinIcon from "../Assets/Icons/linkedin.svg";
@@ -137,7 +136,7 @@ const Main = () => {
       <div className={classes.container}>
         <Route path={["/", "/work"]} component={WorkSection} />
         <Route path="/side-project" component={SideProjectSection} />
-        <Route path="/:project" component={ProjectPage}/>
+        <Route path={["/work/:project","/side-project/:project"]} component={ProjectPage}/>
       </div>
       <div className={classes.container}>
         <div className={classes.footer}>

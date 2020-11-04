@@ -44,7 +44,7 @@ const Work = ({location}) => {
   const classes = useStyles();
   const history = useHistory();
   const { pathname } = location;
-  console.log(pathname);
+  
   const gotoPage = (pagelink) => {
     history.push(`/work${pagelink}`);
   }
