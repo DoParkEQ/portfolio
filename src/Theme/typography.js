@@ -37,7 +37,7 @@ const typography = {
   },
   subtitle: {
     fontSize: 16,
-    fontWeight: 500,
+    fontWeight: 800,
     marginBlockStart: '1em',
     marginBlockEnd: '1em',
   },

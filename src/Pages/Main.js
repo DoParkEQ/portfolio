@@ -1,10 +1,12 @@
 import React from "react";
-import { WorkSection, SideProjectSection, ProjectPage } from "./index";
+import { WorkSection, SideProjectSection, ProjectPage, ProjectNotionPage } from "./index";
 import { Route, Link, Switch, NavLink, useLocation } from "react-router-dom";
 import linkedinIcon from "../Assets/Icons/linkedin.svg";
 import githubIcon from "../Assets/Icons/github.svg";
 import logo from "../Assets/Images/logo.png";
 import { createUseStyles } from "react-jss";
+import Footer from './footer'
+
 
 const useStyles = createUseStyles((theme) => ({
   root: {},
@@ -136,27 +138,10 @@ const Main = () => {
       <div className={classes.container}>
         <Route path={["/", "/work"]} component={WorkSection} />
         <Route path="/side-project" component={SideProjectSection} />
-        <Route path={["/work/:project","/side-project/:project"]} component={ProjectPage}/>
+        <Route path={["/work/:slug","/side-project/:slug"]} component={ProjectNotionPage}/>
       </div>
       <div className={classes.container}>
-        <div className={classes.footer}>
-          <div className="copyright">
-            <p>
-              🖍️ and 👨‍💻 by Do Park
-              <br />© 2020
-            </p>
-          </div>
-          <a href="https://www.linkedin.com/in/do-park/">
-            <div className="favicon">
-              <img src={linkedinIcon} alt="linkedin" />
-            </div>
-          </a>
-          <a href="https://github.com/DoParkEQ">
-            <div className="favicon">
-              <img src={githubIcon} alt="github" />
-            </div>
-          </a>
-        </div>
+        <Footer />
       </div>
     </div>
   );
