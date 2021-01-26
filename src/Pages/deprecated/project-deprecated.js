@@ -1,7 +1,8 @@
-import React from "react";
-import { createUseStyles } from "react-jss";
-import { useHistory } from "react-router-dom";
-import { Text } from '../Components';
+/* eslint-disable */
+import React from 'react'
+import { createUseStyles } from 'react-jss'
+import { useHistory } from 'react-router-dom'
+import { Text } from '../../components'
 
 const useStyles = createUseStyles((theme) => ({
   root: {
@@ -9,7 +10,7 @@ const useStyles = createUseStyles((theme) => ({
     margin: '0 auto',
   },
   hero: {
-      width: '100%',
+    width: '100%',
   },
   titleBlock: {
     margin: '32px 0px',
@@ -19,21 +20,21 @@ const useStyles = createUseStyles((theme) => ({
     height: 600,
     backgroundColor: theme.color.secondary[300],
     borderRadius: '10px',
-      '& img': {
-      }
+    '& img': {
+    },
   },
   textBlock: {
-      // padding: '0px 96px',
+    // padding: '0px 96px',
   },
-}));
+}))
 
 const Project = ({ match }) => {
-  console.log(match);
-  const classes = useStyles();
-  const { pagename } = match.params;
-  const history = useHistory();
+  console.log(match)
+  const classes = useStyles()
+  const { pagename } = match.params
+  const history = useHistory()
   const gotoPage = (pagelink) => {
-    history.push(`/work${pagelink}`);
+    history.push(`/work${pagelink}`)
   }
   return (
     <div className={classes.root}>
@@ -57,7 +58,7 @@ const Project = ({ match }) => {
           patches here and there making the product not consistent.</Text>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Project;
+export default Project

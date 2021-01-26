@@ -62,9 +62,9 @@ const typography = {
       '&:after': {
         fontSize: 12,
         content: '"  🚀"',
-      }
+      },
     },
-    transition: "all 0.4s",
+    transition: 'all 0.4s',
   },
   caption: {
     fontSize: 12,
@@ -72,6 +72,6 @@ const typography = {
     marginBlockStart: '1em',
     marginBlockEnd: '1em',
   },
-};
+}
 
-export default typography;
+export default typography

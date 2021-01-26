@@ -1,7 +1,8 @@
-import React from "react";
-import { Route, Link, Switch, NavLink, useLocation } from "react-router-dom";
+import PropTypes from 'prop-types'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-const ItemCard = ({ slug, title, category, status}) => {
+const ItemCard = ({ slug, title, category, status }) => {
   
   //console.log(status)
   return (
@@ -10,6 +11,13 @@ const ItemCard = ({ slug, title, category, status}) => {
     </Link>
   )
   
-};
+}
 
-export default ItemCard;
+ItemCard.propTypes = {
+  category: PropTypes.array.isRequired,
+  slug: PropTypes.string.isRequired,
+  status: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+}
+
+export default ItemCard
