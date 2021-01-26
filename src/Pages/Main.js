@@ -1,13 +1,14 @@
-import React from "react";
-import { WorkSection, SideProjectSection, ProjectPage, ProjectNotionPage } from "./index";
+import React, { useState, useEffect } from "react";
+import { ProjectPage } from "./index";
 import { Route, Link, Switch, NavLink, useLocation } from "react-router-dom";
 import linkedinIcon from "../Assets/Icons/linkedin.svg";
 import githubIcon from "../Assets/Icons/github.svg";
 import logo from "../Assets/Images/logo.png";
 import { createUseStyles } from "react-jss";
 import Footer from './footer'
-
-
+import Navbar from '../Components/Navbar'
+import axios from 'axios'
+import ItemCard from '../Components/ItemCard'
 const useStyles = createUseStyles((theme) => ({
   root: {},
   header: {
@@ -20,50 +21,6 @@ const useStyles = createUseStyles((theme) => ({
   container: {
     display: "flex",
     margin: "20px 16px",
-  },
-  navigation: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "100%",
-    margin: "32px 8px",
-    "& h3": {
-      margin: "0px 0px",
-      width: "100%",
-      fontWeight: 800,
-      background: `linear-gradient(
-          217deg,
-          rgba(255, 214, 166, 0.8),
-          rgba(255, 0, 0, 0) 70.71%
-        ),
-        linear-gradient(
-          127deg,
-          rgba(167, 153, 255, 0.8),
-          rgba(0, 255, 0, 0) 70.71%
-        ),
-        linear-gradient(
-          336deg,
-          rgba(152, 218, 255, 0.8),
-          rgba(0, 0, 255, 0) 70.71%
-        )`,
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: "transparent",
-    },
-    "& .navlinks": {
-      "& a": {
-        ...theme.typography.subtitle,
-        display: "block",
-        textAlign: "right",
-        color: "rgba(0, 0, 0, 0.5)",
-        textDecoration: "none",
-        "&:hover": {
-          color: "rgba(0, 0, 0, 0.7)",
-        },
-        "&.active": {
-          fontWeight: 600,
-          color: "rgba(0, 94, 128, 0.8)",
-        },
-      },
-    },
   },
   footer: {
     margin: "32px 8px",
@@ -93,10 +50,22 @@ const showNavbar = (pathname) => {
   return paths.includes(pathname);
 }
 
+const credential = process.env.REACT_APP_NOTION_ID
+
+console.log(credential)
+
 const Main = () => {
   const classes = useStyles();
   const { pathname } = useLocation();
-  return (
+  const [posts, setPosts] = useState(null)
+  
+  useEffect(() => {
+    axios.get(
+      `https://notion-api.splitbee.io/v1/table/${credential}`
+        ).then(res => setPosts(res.data))    
+  },[])
+  
+  return posts && (
     <div>
       <div className={classes.container}>
         <div className={classes.header}>
@@ -105,40 +74,13 @@ const Main = () => {
       </div>
       {showNavbar(pathname) && 
         <div className={classes.container}>
-          <div className={classes.navigation}>
-            <div className="logo">
-              <h3>Do Park.</h3>
-            </div>
-            <div className="navlinks">
-              <NavLink
-                className="navlink"
-                to="/work"
-                activeClassName="active"
-              >
-                Work
-              </NavLink>
-              <NavLink
-                className="navlink"
-                to="/side-project"
-                activeClassName="active"
-              >
-                Side projects
-              </NavLink>
-              <NavLink
-                className="navlink"
-                to="/thoughts"
-                activeClassName="active"
-              >
-                Thoughts
-              </NavLink>
-            </div>
-          </div>
+          <Navbar/>
         </div>
       }
       <div className={classes.container}>
-        <Route path={["/", "/work"]} component={WorkSection} />
-        <Route path="/side-project" component={SideProjectSection} />
-        <Route path={["/work/:slug","/side-project/:slug"]} component={ProjectNotionPage}/>
+        {console.log(posts)}
+        {posts.filter(({ category }) => category[0] === pathname).map(data => <ItemCard {...data}/>)}
+        <Route path={["/work/:slug", "/side-projects/:slug", "/thoughts/:slug"]} component={ProjectPage}/>
       </div>
       <div className={classes.container}>
         <Footer />
