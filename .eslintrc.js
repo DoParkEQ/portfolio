@@ -1,24 +1,26 @@
+
 module.exports = {
     env: {
         node: true,
         browser: true,
-        es2021: true
+        es6: true
     },
     extends: [
         "eslint:recommended",
         "plugin:react/recommended"
     ],
+    parser: "babel-eslint",
     parserOptions: {
         ecmaFeatures: {
             jsx: true
         },
-        ecmaVersion: 12,
+        ecmaVersion: 8,
         sourceType: "module"
     },
     plugins: [
         "react","react-hooks"
     ],
-    "rules": {
+    rules: {
         'comma-dangle': ['error', 'always-multiline'],
         'eol-last': ['error', 'always'],
         indent: ['error', 2],
@@ -28,3 +30,5 @@ module.exports = {
         'react/display-name': 'warn',
     }
 };
+
+
