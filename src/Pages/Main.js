@@ -7,6 +7,9 @@ import Footer from './footer'
 import Navbar from '../components/Navbar'
 import axios from 'axios'
 import ItemCard from '../components/ItemCard'
+import { Container, Row, Col } from 'react-grid-system'
+
+
 const useStyles = createUseStyles((theme) => ({
   root: {},
   header: {
@@ -72,9 +75,10 @@ const Main = () => {
         </div>
       }
       <div className={classes.container}>
-        {console.log(posts)}
-        {posts.filter(({ category }) => category[0] === pathname).map((data, index) => <ItemCard key={index} {...data}/>)}
-        <Route path={['/work/:slug', '/side-projects/:slug', '/thoughts/:slug']} component={ProjectPage}/>
+        <Container fluid style={{width: '100%', padding: 0}}>
+          {posts.filter(({ category }) => category[0] === pathname).map((data, index) => <ItemCard key={index} {...data}/>)}
+        </Container>
+        <Route path={['/work/:slug', '/side-projects/:slug', '/thoughts/:slug']} component={ProjectPage} />
       </div>
       <div className={classes.container}>
         <Footer />
