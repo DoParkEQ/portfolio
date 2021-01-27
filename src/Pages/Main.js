@@ -6,8 +6,9 @@ import { createUseStyles } from 'react-jss'
 import Footer from './footer'
 import Navbar from '../components/Navbar'
 import axios from 'axios'
-import ItemCard from '../components/ItemCard'
+import ItemCard from '../components/WorkCard'
 import { Container, Row, Col } from 'react-grid-system'
+import Gallery from '../components/Gallery'
 
 
 const useStyles = createUseStyles((theme) => ({
@@ -63,6 +64,7 @@ const Main = () => {
   },[])
   
   return posts && (
+    <>
     <div>
       <div className={classes.container}>
         <div className={classes.header}>
@@ -74,16 +76,18 @@ const Main = () => {
           <Navbar/>
         </div>
       }
-      <div className={classes.container}>
-        <Container fluid style={{width: '100%', padding: 0}}>
+        <div className={classes.container}>
+          <Gallery posts={posts} currentPath={pathname}/>
+        {/* <Container fluid style={{width: '100%', padding: 0}}>
           {posts.filter(({ category }) => category[0] === pathname).map((data, index) => <ItemCard key={index} {...data}/>)}
-        </Container>
-        <Route path={['/work/:slug', '/side-projects/:slug', '/thoughts/:slug']} component={ProjectPage} />
+        </Container> */}
       </div>
       <div className={classes.container}>
         <Footer />
       </div>
     </div>
+    <Route path={['/work/:slug', '/side-projects/:slug', '/thoughts/:slug']} component={ProjectPage} />
+    </>
   )
 }
 
