@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 const SideProjectCard = (data) => {
-    return (
-        <div>
+  return (
+    <div>
             side
-        </div>
-    );
-};
+    </div>
+  )
+}
 
-export default SideProjectCard;
+export default SideProjectCard

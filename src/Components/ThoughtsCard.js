@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 const ThoughtsCard = (data) => {
-    return (
-        <div>
+  return (
+    <div>
             thoughts
-        </div>
-    );
-};
+    </div>
+  )
+}
 
-export default ThoughtsCard;
+export default ThoughtsCard

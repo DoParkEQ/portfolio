@@ -7,7 +7,6 @@ const useStyles = createUseStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%',
-    margin: '32px 8px',
     '& h3': {
       margin: '0px 0px',
       width: '100%',

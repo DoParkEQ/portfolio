@@ -52,8 +52,7 @@ p {
 
 body {
   background: #fff;
-  max-width: 1280px;
-  margin: 0 auto;
+  height: 100%;
   font-family: "Martel", "Open Sans", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -62,4 +61,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+body > #root > div {
+  height: 100vh;
 }

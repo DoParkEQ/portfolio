@@ -5,7 +5,6 @@ import githubIcon from '../assets/icons/github.svg'
 
 const useStyles = createUseStyles((theme) => ({
   footer: {
-    margin: '32px 8px',
     display: 'flex',
     alignItems: 'center',
     width: '100%',
