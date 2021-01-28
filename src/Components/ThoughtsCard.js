@@ -32,7 +32,6 @@ const useStyles = createUseStyles((theme) => ({
     transition: 'all 0.4s ease-in-out',
   },
   container: {
-    padding: 16,
     borderRadius: 10,
     border: `solid 1px ${theme.color.secondary[200]}`,
     boxShadow: theme.shadow[10],
@@ -47,11 +46,11 @@ const ThoughtsCard = ({ isActive, data }) => {
 
   const { title, date, slug, status, category, tagline } = data 
   const classes = useStyles(isActive)
-  console.log(data)
   return (
     <div>
-      <Row className={classes.root}>
-        <Col className={classes.container} sm={12}>
+      <Row nogutter className={classes.root}>
+         {/*Inline styling for overriding padding prop of <Col> */}
+        <Col style={{padding: 16}} className={classes.container} sm={12}>
           <Text className={classes.text} variant='subtitle'>{date}</Text>
           <Text className={classes.text} variant='h6'>{title}</Text>
           <Text className={classes.text} variant='body'>{tagline}</Text>

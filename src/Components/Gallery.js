@@ -35,7 +35,7 @@ const Gallery = ({ posts, currentPath }) => {
   },[isTransition])
     
   return (
-    <Container fluid style={{ width: '100%', padding: 0 }}>
+    <Container gutterWidth={0} fluid style={{ width: '100%', padding: 0 }}>
       {filteredPosts.map((data, index) => <div onMouseOver={() => onHover(index)}><Card key={index} isActive={index === currentItem ? true : false} duration={duration} data={data} /></div>)}
     </Container>
   )
