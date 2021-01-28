@@ -9,7 +9,6 @@ const useStyles = createUseStyles((theme) => ({
 }))
 
 const Text = ({ className, variant, children, ...rest }) => {
-  console.log(rest)
   const classes = useStyles(variant)
   return (
     <p className={clsx([classes.root], className)} {...rest}>

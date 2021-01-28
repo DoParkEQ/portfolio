@@ -7,46 +7,53 @@ import { createUseStyles } from 'react-jss'
 import clsx from 'clsx'
 
 
-const useStyles = createUseStyles((theme) => ({
-  root: {
+const useStyles = createUseStyles((theme) =>  ({
+  root: ({ isActive, duration }) => ({
     padding: 0,
-    margin: isActive => isActive ? '24px 0px' : '16px 0px',
-    height: isActive => isActive ? 300 : 80,
-    transition: 'all 0.4s ease-in-out',
-  },
+    margin: '24px 0px',
+    height: isActive ? 300 : 80,
+    // transition: 'all 0.3s ease-in-out',
+    transition: `all ${duration}s ease-in-out`,
+  }),
   text: {
     margin: 0,
   },
-  textContainer: {
-    opacity: isActive => isActive ? 1.0 : 0.2,
-    transition: 'all 0.4s ease-in-out',
-  },
-  hiddenText: {
-    opacity: isActive => isActive ? 1 : 0,
-    transition: 'all 0.4s ease-in-out',
-  },
-  image: {
+  textContainer: ({ isActive, duration }) => ({
+    opacity: isActive ? 1.0 : 0.2,
+    // transition: 'all 0.3s ease-in-out',
+    transition: `all ${duration}s ease-in-out`,
+  
+  }),
+  hiddenText: ({ isActive, duration }) => ({
+    opacity: isActive ? 1 : 0,
+    // transition: 'all 0.3s ease-in-out',
+    transition: `all ${duration}s ease-in-out`,
+  }),
+  image: ({ isActive, duration }) => ({
     width: '100%',
-    height: isActive => isActive ? 300 : 80,
+    height: isActive ? 300 : 80,
     backgroundColor: '#cdcdcd',
     borderRadius: 10,
-    transition: 'all 0.4s ease-in-out',
-  },
-
+    // transition: 'all 0.3s ease-in-out',
+    transition: `all ${duration}s ease-in-out`,
+  }),
+  // animation: ({ duration }) => ({
+  //   transition: `all ${duration}s ease-in-out`,
+  // })
 }))
 
-const ItemCard = ({ isActive, data }) => {
+const ItemCard = ({ duration, isActive, data }) => {
   const { title, date, client, tagline, slug, status, category } = data
 
-  const classes = useStyles(isActive)
+  const classes = useStyles({ isActive, duration })
  
   return (   
-    <Row className={classes.root} >
-      <Col className={classes.textContainer} sm={4}>
+    <Row className={clsx([classes.root],[classes.animation])} >
+      <Col className={clsx([classes.textContainer],[classes.animation])} sm={4}>
         <Text className={classes.text} variant='subtitle'>{client}</Text>
         <Text className={classes.text} variant='h4'>{title}</Text>
-        <Text className={clsx([classes.text],[classes.hiddenText])} variant='body'>{tagline}</Text>
-        <Text className={clsx([classes.text],[classes.hiddenText])} variant='body'>{date}</Text>
+        <Text className={clsx([classes.text],[classes.hiddenText],[classes.animation])} variant='body'>{tagline}</Text>
+        <Text className={clsx([classes.text],[classes.hiddenText],[classes.animation])} variant='body'>{date}</Text>
       </Col>
       <Col sm={8}>
         <Link to={`${category[0]}/${slug}`}>
