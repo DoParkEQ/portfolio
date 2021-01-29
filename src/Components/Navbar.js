@@ -3,6 +3,12 @@ import { createUseStyles } from 'react-jss'
 import { NavLink } from 'react-router-dom'
 
 const useStyles = createUseStyles((theme) => ({
+  navlink: {
+    margin: 0,
+    padding: 0,
+    fontFamily: 'Open Sans',
+    fontSize: 14,
+  },
   navigation: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -30,9 +36,13 @@ const useStyles = createUseStyles((theme) => ({
       WebkitTextFillColor: 'transparent',
     },
     '& .navlinks': {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: 0,
       '& a': {
-        ...theme.typography.subtitle,
-        display: 'block',
+        ...theme.typography.body,
+        marginBlockStart: '0.5em',
+        marginBlockEnd: '0.5em',
         textAlign: 'right',
         color: 'rgba(0, 0, 0, 0.5)',
         textDecoration: 'none',
@@ -40,8 +50,7 @@ const useStyles = createUseStyles((theme) => ({
           color: 'rgba(0, 0, 0, 0.7)',
         },
         '&.active': {
-          fontWeight: 600,
-          color: 'rgba(0, 94, 128, 0.8)',
+          color: theme.color.secondary[900],
         },
       },
     },
@@ -57,21 +66,21 @@ const Navbar = () => {
       </div>
       <div className="navlinks">
         <NavLink
-          className="navlink"
+          className={classes.navlink}
           to="/work"
           activeClassName="active"
         >
                 Work
         </NavLink>
         <NavLink
-          className="navlink"
+          className={classes.navlink}
           to="/side-project"
           activeClassName="active"
         >
                 Side projects
         </NavLink>
         <NavLink
-          className="navlink"
+          className={classes.navlink}
           to="/thoughts"
           activeClassName="active"
         >

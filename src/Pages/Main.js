@@ -32,8 +32,9 @@ const useStyles = createUseStyles((theme) => ({
   },
   container: {
     display: 'flex',
-    margin: '20px 16px',
+    padding: '20px 16px',
   },
+  
   footerContainer: {
     flexShrink: 0,
   },
@@ -74,6 +75,7 @@ const Main = () => {
           </div>
         </div>
         <Route path={['/work/:slug', '/side-projects/:slug', '/thoughts/:slug']} component={ProjectPage} />
+        
         <div className={classes.footerContainer}>
           <div className={classes.footer}>
             <div className={classes.container}>

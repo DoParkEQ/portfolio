@@ -9,8 +9,8 @@ import clsx from 'clsx'
 
 const useStyles = createUseStyles((theme) =>  ({
   root: ({ isActive, duration }) => ({
+    width: '100%',
     padding: 0,
-    margin: '24px 0px',
     height: isActive ? 300 : 80,
     transition: `all ${duration}s ease-in-out`,
   }),
@@ -33,23 +33,30 @@ const useStyles = createUseStyles((theme) =>  ({
     borderRadius: 10,
     transition: `all ${duration}s ease-in-out`,
   }),
-
+  date: {
+    color: theme.color.secondary[500],
+  },
+  subContainer: {
+    marginTop: 32,
+  },
 }))
 
-const ItemCard = ({ duration, isActive, data }) => {
-  const { title, date, client, tagline, slug, status, category } = data
+const WorkCard = ({ duration, isActive, data, onHover }) => {
+  const { title, date, client, tagline, slug, status, category, id } = data
 
   const classes = useStyles({ isActive, duration })
  
   return (   
-    <Row nogutter className={clsx([classes.root])} >
-      <Col className={clsx([classes.textContainer])} sm={4}>
+    <Row style={{ margin: '12px 0px' }} className={classes.root} onMouseOver={()=>onHover(id)}>
+      <Col style={{ padding: 0 }} className={classes.textContainer} sm={4}>
         <Text className={classes.text} variant='subtitle'>{client}</Text>
         <Text className={classes.text} variant='h4'>{title}</Text>
-        <Text className={clsx([classes.text],[classes.hiddenText])} variant='body'>{tagline}</Text>
-        <Text className={clsx([classes.text],[classes.hiddenText])} variant='body'>{date}</Text>
+        <div className={classes.subContainer}>
+          <Text className={classes.hiddenText} variant='body' typeface='Open Sans'>{tagline}</Text>
+          <Text className={clsx([classes.hiddenText],[classes.date])} variant='body' typeface='Open Sans'>{date}</Text>
+        </div>
       </Col>
-      <Col sm={8}>
+      <Col style={{ padding: 0 }} sm={8}>
         <Link to={`${category[0]}/${slug}`}>
           <div className={classes.image}/>
         </Link>
@@ -61,11 +68,11 @@ const ItemCard = ({ duration, isActive, data }) => {
   
 }
 
-ItemCard.propTypes = {
+WorkCard.propTypes = {
   category: PropTypes.array.isRequired,
   slug: PropTypes.string.isRequired,
   status: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
 }
 
-export default ItemCard
+export default WorkCard
