@@ -23,10 +23,13 @@ const Text = ({ className, variant, typeface, children, ...rest }) => {
 Text.propTypes = {
   children: PropTypes.string.isRequired,
   variant: PropTypes.string,
+  typeface: PropTypes.string,
+  className: PropTypes.object,
 }
 
 Text.defaultProps = {
   variant: 'body',
+  typeface: 'Open Sans',
 }
 
 export default Text

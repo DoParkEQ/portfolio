@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import { createUseStyles } from 'react-jss'
 import { Col, Row } from 'react-grid-system'
@@ -54,6 +55,27 @@ const ThoughtsCard = ({ isActive, data }) => {
     </Col>
    
   )
+}
+
+ThoughtsCard.propTypes = {
+  category: PropTypes.array.isRequired,
+  data: PropTypes.shape({
+    category: PropTypes.array,
+    client: PropTypes.string,
+    date: PropTypes.string,
+    id: PropTypes.string,
+    image: PropTypes.string,
+    slug: PropTypes.string,
+    status: PropTypes.array,
+    tagline: PropTypes.string,
+    title: PropTypes.string,
+  }),
+  duration: PropTypes.number,
+  isActive: PropTypes.bool,
+  onHover: PropTypes.func,
+  slug: PropTypes.string.isRequired,
+  status: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
 }
 
 export default ThoughtsCard

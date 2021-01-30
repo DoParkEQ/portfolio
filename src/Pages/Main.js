@@ -6,13 +6,11 @@ import { createUseStyles } from 'react-jss'
 import Footer from './footer'
 import Navbar from '../components/Navbar'
 import axios from 'axios'
-import ItemCard from '../components/WorkCard'
-import { Container, Row, Col } from 'react-grid-system'
 import Gallery from '../components/Gallery'
 
 
 
-const useStyles = createUseStyles((theme) => ({
+const useStyles = createUseStyles(() => ({
   root: {
     maxWidth: 1280,
     margin: '0 auto',
@@ -34,7 +32,6 @@ const useStyles = createUseStyles((theme) => ({
     display: 'flex',
     padding: '20px 16px',
   },
-  
   footerContainer: {
     flexShrink: 0,
   },

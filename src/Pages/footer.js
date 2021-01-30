@@ -2,6 +2,8 @@ import React from 'react'
 import { createUseStyles } from 'react-jss'
 import linkedinIcon from '../assets/icons/linkedin.svg'
 import githubIcon from '../assets/icons/github.svg'
+import Text from '../components/Text'
+
 
 const useStyles = createUseStyles((theme) => ({
   footer: {
@@ -30,10 +32,11 @@ const Footer = () => {
   return (
     <div className={classes.footer}>
       <div className="copyright">
-        <p>
-            🖍️ and 👨‍💻 by Do Park
+        <Text vartiant='body' typeface='Open Sans'>
+            🎨 and 👨‍💻 by Do Park
           <br />© 2020
-        </p>
+        </Text>
+        
       </div>
       <a href="https://www.linkedin.com/in/do-park/">
         <div className="favicon">

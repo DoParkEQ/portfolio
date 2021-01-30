@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import { Container,Row } from 'react-grid-system'
 import WorkCard from './WorkCard'
@@ -73,7 +74,7 @@ const Gallery = ({ posts, currentPath }) => {
       {formattedPosts.map(post => 
         <Row style={{ width: '100%', margin: 0, boxSizing: 'border-box' }}>
           {post.map((data, index) =>
-            <Card key={index}
+            <Card
               index={index}
               isActive={data.id === currentItem ? true : false}
               duration={duration}
@@ -85,6 +86,11 @@ const Gallery = ({ posts, currentPath }) => {
 
     </Container>
   )
+}
+
+Gallery.propTypes = {
+  currentPath: PropTypes.string,
+  posts: PropTypes.array,
 }
 
 export default Gallery

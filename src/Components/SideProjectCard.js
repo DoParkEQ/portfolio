@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import { createUseStyles } from 'react-jss'
 import { Col, Row } from 'react-grid-system'
@@ -51,7 +52,7 @@ const useStyles = createUseStyles((theme) => ({
 
 const doubleSized = ['side-project-1','side-project-6']
 
-const SideProjectCard = ({ index, isActive, data }) => {
+const SideProjectCard = ({ isActive, data }) => {
 
   const { title, date, slug, status, category, tagline } = data 
   const classes = useStyles(isActive)
@@ -69,6 +70,21 @@ const SideProjectCard = ({ index, isActive, data }) => {
     </Col>
 
   )
+}
+
+SideProjectCard.propTypes = {
+  data: PropTypes.shape({
+    category: PropTypes.array,
+    client: PropTypes.string,
+    date: PropTypes.string,
+    id: PropTypes.string,
+    image: PropTypes.string,
+    slug: PropTypes.string,
+    status: PropTypes.array,
+    tagline: PropTypes.string,
+    title: PropTypes.string,
+  }),
+  isActive: PropTypes.bool,
 }
 
 export default SideProjectCard

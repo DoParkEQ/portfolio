@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import { NotionRenderer } from 'react-notion'
 import axios from 'axios'
-import 'react-notion/src/styles.css'
+import '../styles/notion.css'
 
 
 const ProjectNotion = ({ match }) => {
