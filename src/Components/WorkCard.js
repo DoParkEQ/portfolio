@@ -47,7 +47,7 @@ const useStyles = createUseStyles((theme) =>  ({
 
 const WorkCard = ({ duration, isActive, data, onHover }) => {
   const { title, date, client, tagline, slug, status, category, id, image } = data
-
+  const locked = status.includes('locked')
   const classes = useStyles({ isActive, duration, image })
  
   return (   
@@ -58,12 +58,13 @@ const WorkCard = ({ duration, isActive, data, onHover }) => {
         <div className={classes.subContainer}>
           <Text className={classes.hiddenText} variant='body' typeface='Open Sans'>{tagline}</Text>
           <Text className={clsx([classes.hiddenText],[classes.date])} variant='body' typeface='Open Sans'>{date}</Text>
+          {locked && <Text className={classes.hiddenText} style={{color: '#0075EE'}} typeface='Open Sans'>This post is currently locked 🔒</Text>}
         </div>
       </Col>
       <Col style={{ padding: 0 }} sm={8}>
-        <Link to={`${category[0]}/${slug}`}>
+        <Link to={locked ? `/work` : `${category[0]}/${slug}`}>
           <div className={classes.image} />
-        </Link>
+        </Link> 
       </Col>
     </Row>
     

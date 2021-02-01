@@ -40,7 +40,7 @@ const Gallery = ({ posts, currentPath }) => {
     
   const [currentItem, setCurrentItem ] = useState(initId)
   const [isTransition, setIsTransition] = useState(false)
-  const filteredPosts = posts.filter(({ category }) => category[0] === currentPath)
+  const filteredPosts = posts.filter(({ category, status }) => category[0] === currentPath && status.includes('live'))
   const formattedPosts = formatPosts(filteredPosts, gridNum[currentPath])
   console.log(filteredPosts,formattedPosts)
 
@@ -61,7 +61,7 @@ const Gallery = ({ posts, currentPath }) => {
   },[isTransition])
 
   return (
-    <Container fluid style={{ width: '100%', padding: 0 }}>
+    <Container fluid style={{ width: '100%', padding: 16 }}>
       {/* {formattedPosts.map(post => 
         post.map((data, index) =>
           <div onMouseOver={() => onHover(index)}>

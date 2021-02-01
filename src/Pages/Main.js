@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ProjectPage } from './index'
+import { ProjectPage, LockedPage } from './index'
 import { Route, useLocation } from 'react-router-dom'
 import logo from '../assets/images/logo.png'
 import { createUseStyles } from 'react-jss'
@@ -22,6 +22,9 @@ const useStyles = createUseStyles(() => ({
     flex: '1 0 auto',
   },
   header: {
+    padding: '20px 16px',
+  },
+  logo: {
     margin: '0px 8px',
     '& img': {
       width: 40,
@@ -29,7 +32,6 @@ const useStyles = createUseStyles(() => ({
     },
   },
   container: {
-    display: 'flex',
     padding: '20px 16px',
   },
   footerContainer: {
@@ -56,9 +58,9 @@ const Main = () => {
   return posts && (
     <>
       <div className={classes.root}>
-        <div className={classes.content}>
+        <div className={classes.header}>
           <div className={classes.container}>
-            <div className={classes.header}>
+            <div className={classes.logo}>
               <img src={logo} alt="logo" />
             </div>
           </div>
@@ -67,12 +69,14 @@ const Main = () => {
             <Navbar/>
           </div>
           }
+        </div>
+        <div className={classes.content}>
           <div className={classes.container}>
             <Gallery posts={posts} currentPath={pathname}/>
+            <Route path={['/work/:slug', '/side-projects/:slug', '/thoughts/:slug']} component={ProjectPage} />
+            <Route path={['/locked']} component={LockedPage} />
           </div>
         </div>
-        <Route path={['/work/:slug', '/side-projects/:slug', '/thoughts/:slug']} component={ProjectPage} />
-        
         <div className={classes.footerContainer}>
           <div className={classes.footer}>
             <div className={classes.container}>
