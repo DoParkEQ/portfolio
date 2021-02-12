@@ -4,7 +4,7 @@ import { createUseStyles } from 'react-jss'
 import { Col, Row } from 'react-grid-system'
 import Text from './Text'
 import clsx from 'clsx'
-
+import { useImage } from './hooks'
 
 const useStyles = createUseStyles((theme) => ({
   root: {
@@ -20,30 +20,37 @@ const useStyles = createUseStyles((theme) => ({
     margin: '0.5rem',
   },
   textContainer: {
-    opacity: isActive => isActive ? 1.0 : 0.2,
+    opacity: ({ isActive }) => isActive ? 1.0 : 0.2,
     transition: 'all 0.4s ease-in-out',
   },
   hiddenText: {
-    opacity: isActive => isActive ? 1 : 0,
-    transition: 'all 0.4s ease-in-out',
-  },
-  image: {
-    width: '100%',
-    height: isActive => isActive ? 300 : 80,
-    backgroundColor: '#cdcdcd',
-    borderRadius: 10,
+    opacity: ({ isActive }) => isActive ? 1 : 0,
     transition: 'all 0.4s ease-in-out',
   },
   container: {
     width: '100%',
     height: 250,
     borderRadius: 10,
-    border: `solid 1px ${theme.color.secondary[200]}`,
     boxShadow: theme.shadow[10],
-    transition: 'all 0.3s ease-in-out',
     '&:hover': {
       boxShadow: theme.shadow[30],
+      transform: 'scale(1.01)',
     },
+    transition: 'all 0.2s ease-in-out',
+  },
+  skeleton: {
+    backgroundColor: theme.color.secondary[400],
+    width: '100%',
+    height: 250,
+    borderRadius: 10,
+    boxShadow: theme.shadow[10],
+    animation: '$shine 1.6s infinite',
+    transitionTimingFunction: 'ease-in-out',
+  },
+  '@keyframes shine': {
+    '0%': { backgroundColor: theme.color.secondary[400] },
+    '50%': { backgroundColor: theme.color.secondary[300] },
+    '100%': { backgroundColor: theme.color.secondary[400] },
   },
   date: {
     color: theme.color.secondary[500],
@@ -54,20 +61,17 @@ const doubleSized = ['side-project-1','side-project-6']
 
 const SideProjectCard = ({ isActive, data }) => {
 
-  const { title, date, slug, status, category, tagline } = data 
-  const classes = useStyles(isActive)
+  const { title, date, slug, status, image } = data
+  const [isLoading, imgUrl] = useImage(image)
+  const classes = useStyles({ isActive, image })
   const colSize = doubleSized.includes(slug) ? 6 : 3
 
   return (
-
-    <Col style={{ padding: 12 }} sm={colSize}>
-      <div className={classes.container}>
-        <Text className={clsx([classes.text],[classes.date])} variant='body' typeface='Open Sans'>{date}</Text>
-        <Text className={classes.text} variant='subtitle'>{title}</Text>
-        {/* <Text className={classes.text} variant='body' typeface='Open Sans'>{tagline}</Text> */}
-        {/* <Text className={classes.text} variant='button' typeface='Open Sans'>Read more</Text> */}
-      </div>
-    </Col>
+    <Link to={`${category[0]}/${slug}`}>
+      <Col style={{ padding: 12 }} sm={colSize}>
+        {isLoading ? <div className={classes.skeleton} /> :  <img className={classes.container} src={imgUrl}/>}
+      </Col>
+    </Link>
 
   )
 }

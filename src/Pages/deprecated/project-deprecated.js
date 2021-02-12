@@ -29,7 +29,6 @@ const useStyles = createUseStyles((theme) => ({
 }))
 
 const Project = ({ match }) => {
-  console.log(match)
   const classes = useStyles()
   const { pagename } = match.params
   const history = useHistory()

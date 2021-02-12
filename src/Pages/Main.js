@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ProjectPage, LockedPage } from './index'
+import { ProjectPage } from './index'
 import { Route, useLocation } from 'react-router-dom'
 import logo from '../assets/images/logo.png'
 import { createUseStyles } from 'react-jss'
@@ -74,7 +74,6 @@ const Main = () => {
           <div className={classes.container}>
             <Gallery posts={posts} currentPath={pathname}/>
             <Route path={['/work/:slug', '/side-projects/:slug', '/thoughts/:slug']} component={ProjectPage} />
-            <Route path={['/locked']} component={LockedPage} />
           </div>
         </div>
         <div className={classes.footerContainer}>

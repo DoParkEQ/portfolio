@@ -42,8 +42,7 @@ const Gallery = ({ posts, currentPath }) => {
   const [isTransition, setIsTransition] = useState(false)
   const filteredPosts = posts.filter(({ category, status }) => category[0] === currentPath && status.includes('live'))
   const formattedPosts = formatPosts(filteredPosts, gridNum[currentPath])
-  console.log(filteredPosts,formattedPosts)
-
+  
   const Card = getCard(currentPath)
   
   const onHover = (num) => {

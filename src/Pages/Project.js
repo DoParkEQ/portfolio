@@ -15,7 +15,6 @@ const ProjectNotion = ({ match }) => {
     `https://notion-api.splitbee.io/v1/table/${process.env.REACT_APP_NOTION_ID}`,
   ).then(res => {
     const blogList = res.data
-    console.log(blogList)
     const blog = blogList.find(list => list.slug === slug)
     setBlogId(blog.id)
   })
