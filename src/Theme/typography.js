@@ -56,15 +56,6 @@ const typography = {
     color: '#0075ff',
     marginBlockStart: '1em',
     marginBlockEnd: '1em',
-    '&:hover': {
-      fontSize: 14,
-      color: '#00aaff',
-      '&:after': {
-        fontSize: 12,
-        content: '"  🚀"',
-      },
-    },
-    transition: 'all 0.4s',
   },
   caption: {
     fontSize: 12,

@@ -20,7 +20,7 @@ const Chip = ({ className, label }) => {
   const classes = useStyles()
   return (
     <div className={clsx([classes.chip],className)}>
-          <Text className={classes.text} typeface='Lato' variant='body'>{label}</Text>
+      <Text className={classes.text} typeface='Lato' variant='body'>{label}</Text>
     </div>
   )
 }
@@ -28,6 +28,7 @@ const Chip = ({ className, label }) => {
 
 Chip.propTypes = {
   className: PropTypes.object,
+  label: PropTypes.string,
 }
 
 export default Chip
