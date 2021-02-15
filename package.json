@@ -47,5 +47,6 @@
     "eslint": "6.6.0",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0"
-  }
+  },
+  "homepage": "https://dopark.ca"
 }
