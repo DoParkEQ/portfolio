@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './app'
 import * as serviceWorker from './serviceWorker'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom'
 import theme from './theme'
 import { ThemeProvider } from 'react-jss'
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Router>
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>
-  </BrowserRouter>,
+  </Router>,
   document.getElementById('root'),
 )
 
