@@ -3,37 +3,49 @@ import { createUseStyles } from 'react-jss'
 import { NavLink } from 'react-router-dom'
 
 const useStyles = createUseStyles((theme) => ({
+  navlink: {
+    margin: 0,
+    padding: 0,
+    fontFamily: 'Lato',
+    fontSize: 14,
+  },
   navigation: {
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%',
-    margin: '32px 8px',
     '& h3': {
+      filter: 'hue-rotate(0%)',
       margin: '0px 0px',
       width: '100%',
-      fontWeight: 800,
+      fontWeight: 900,
       background: `linear-gradient(
               217deg,
-              rgba(255, 214, 166, 0.8),
+              rgba(255, 182, 139, 1.0),
               rgba(255, 0, 0, 0) 70.71%
             ),
             linear-gradient(
               127deg,
-              rgba(167, 153, 255, 0.8),
+              rgba(167, 153, 255, 1.0),
               rgba(0, 255, 0, 0) 70.71%
             ),
             linear-gradient(
               336deg,
-              rgba(152, 218, 255, 0.8),
+              rgba(73, 200, 207, 1.0),
               rgba(0, 0, 255, 0) 70.71%
             )`,
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
+      animation: '$hue-rotate 3s infinite',
+      transitionTimingFunction: 'ease-in-out',
     },
     '& .navlinks': {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: 0,
       '& a': {
-        ...theme.typography.subtitle,
-        display: 'block',
+        ...theme.typography.body,
+        marginBlockStart: '0.5em',
+        marginBlockEnd: '0.5em',
         textAlign: 'right',
         color: 'rgba(0, 0, 0, 0.5)',
         textDecoration: 'none',
@@ -41,13 +53,19 @@ const useStyles = createUseStyles((theme) => ({
           color: 'rgba(0, 0, 0, 0.7)',
         },
         '&.active': {
-          fontWeight: 600,
-          color: 'rgba(0, 94, 128, 0.8)',
+          color: theme.color.secondary[900],
         },
       },
     },
   },
+  '@keyframes hue-rotate': {
+    '0%': { filter: 'hue-rotate(360deg)' },
+    '50%': { filter: 'hue-rotate(320deg)' },
+    '100%': { filter: 'hue-rotate(360deg)' },
+  },
 }))
+
+
 
 const Navbar = () => {
   const classes = useStyles()
@@ -58,21 +76,21 @@ const Navbar = () => {
       </div>
       <div className="navlinks">
         <NavLink
-          className="navlink"
+          className={classes.navlink}
           to="/work"
           activeClassName="active"
         >
                 Work
         </NavLink>
         <NavLink
-          className="navlink"
+          className={classes.navlink}
           to="/side-project"
           activeClassName="active"
         >
                 Side projects
         </NavLink>
         <NavLink
-          className="navlink"
+          className={classes.navlink}
           to="/thoughts"
           activeClassName="active"
         >

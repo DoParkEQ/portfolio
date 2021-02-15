@@ -6,40 +6,34 @@ import { createUseStyles } from 'react-jss'
 import Footer from './footer'
 import Navbar from '../components/Navbar'
 import axios from 'axios'
-import ItemCard from '../components/ItemCard'
-const useStyles = createUseStyles((theme) => ({
-  root: {},
+import Gallery from '../components/Gallery'
+
+
+const useStyles = createUseStyles(() => ({
+  root: {
+    maxWidth: 1280,
+    margin: '0 auto',
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+  },
+  content: {
+    flex: '1 0 auto',
+  },
   header: {
-    margin: '0px 8px',
+    padding: '20px 16px',
+  },
+  logo: {
     '& img': {
       width: 40,
       height: 40,
     },
   },
   container: {
-    display: 'flex',
-    margin: '20px 16px',
+    padding: '20px 16px',
   },
-  footer: {
-    margin: '32px 8px',
-    display: 'flex',
-    alignItems: 'center',
-    width: '100%',
-    '& p': {
-      ...theme.typography.caption,
-      color: 'rgba(0,0,0,0.6)',
-    },
-    '& .favicon': {
-      marginLeft: 8,
-    },
-    '& .copyright': {
-      marginRight: 'auto',
-    },
-    '& img': {
-      width: 32,
-      height: 32,
-      boxShadow: '0px 1px 4px rgba(12, 12, 13, 0.1)',
-    },
+  footerContainer: {
+    flexShrink: 0,
   },
 }))
 
@@ -60,27 +54,38 @@ const Main = () => {
   },[])
   
   return posts && (
-    <div>
-      <div className={classes.container}>
+    <>
+      <div className={classes.root}>
         <div className={classes.header}>
-          <img src={logo} alt="logo" />
+          <div className={classes.container}>
+            <div className={classes.logo}>
+              <img src={logo} alt="logo" />
+            </div>
+          </div>
+          {showNavbar(pathname) && 
+          <div className={classes.container}>
+            <Navbar/>
+          </div>
+          }
+        </div>
+        <div className={classes.content}>
+          <div className={classes.container}>
+            <Gallery posts={posts} currentPath={pathname}/>
+            <Route path={['/work/:slug', '/side-project/:slug', '/thoughts/:slug']} component={ProjectPage} />
+          </div>
+        </div>
+        <div className={classes.footerContainer}>
+          <div className={classes.footer}>
+            <div className={classes.container}>
+              <Footer />
+            </div>
+          </div>
         </div>
       </div>
-      {showNavbar(pathname) && 
-        <div className={classes.container}>
-          <Navbar/>
-        </div>
-      }
-      <div className={classes.container}>
-        {console.log(posts)}
-        {posts.filter(({ category }) => category[0] === pathname).map((data, index) => <ItemCard key={index} {...data}/>)}
-        <Route path={['/work/:slug', '/side-projects/:slug', '/thoughts/:slug']} component={ProjectPage}/>
-      </div>
-      <div className={classes.container}>
-        <Footer />
-      </div>
-    </div>
+    </>
   )
 }
+
+
 
 export default Main

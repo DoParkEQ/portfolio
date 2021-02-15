@@ -23,6 +23,9 @@ const color = {
     800: '#424242',
     900: '#212121',
   },
+  system: {
+    locked: '#ffebc7',
+  },
 }
 
 export default color

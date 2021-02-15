@@ -19,7 +19,7 @@ const typography = {
   },
   h4: {
     fontSize: 34,
-    fontWeight: 400,
+    fontWeight: 700,
     marginBlockStart: '1em',
     marginBlockEnd: '1em',
   },
