@@ -56,7 +56,7 @@ const ThoughtsCard = ({ data }) => {
         <div>
           <div className={classes.titleContainer}>
             <Text className={clsx([classes.text], [classes.date])} variant='body' typeface='Lato'>{date}</Text>
-            {locked && <Chip/>}
+            {locked && <Chip label="🔒"/>}
           </div>
           <div>
             <Text className={classes.text} variant='subtitle'>{title}</Text>  

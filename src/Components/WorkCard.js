@@ -85,6 +85,10 @@ const useStyles = createUseStyles((theme) => ({
     animation: '$shine 1.6s infinite',
     transitionTimingFunction: 'ease-in-out',
   },
+  titleContainer: {
+      display: 'flex',
+      justifyContent: 'space-between',
+  },
 }))
 
 const WorkCard = ({ duration, isActive, data, onHover }) => {
@@ -103,7 +107,7 @@ const WorkCard = ({ duration, isActive, data, onHover }) => {
         <div className={classes.subContainer}>
           <Text className={classes.hiddenText} variant='subtitle' typeface='Lato'>{tagline}</Text>
           <Text className={clsx([classes.hiddenText],[classes.date])} variant='body' typeface='Lato'>{date}</Text>
-          {locked && <Chip className={classes.hiddenText}/>}
+          {locked && <Chip className={classes.hiddenText} label="🔒"/>}
         </div>
       </Col>
       <Col style={{ padding: 0 }} sm={8} md={8}>
@@ -115,7 +119,10 @@ const WorkCard = ({ duration, isActive, data, onHover }) => {
     : (
       <Row style={{ margin: '12px 0px' }} className={classes.rootMobile} onMouseOver={()=>onHover(id)}>
         <Col style={{ padding: 0 }} sm={12}>
-          <Text variant='h6' className={classes.text}>{title}</Text>
+          <div className={classes.titleContainer}>
+            <Text variant='h6' className={classes.text}>{title}</Text>
+            {locked && <Chip label="🔒" />}
+          </div>
           <Text variant='subtitle' typeface='Lato'>{tagline}</Text>
           <Link to={locked ? '/work' : `${category[0]}/${slug}`}>
             {isLoading ? <div className={classes.skeletonMobile} /> : <img className={classes.imageMobile} src={imgUrl} />}
@@ -123,7 +130,6 @@ const WorkCard = ({ duration, isActive, data, onHover }) => {
         </Col>  
         <Col style={{ padding: 0 }} sm={12}>
           <div >
-            {locked && <Chip/>}
           </div>
         </Col>
       </Row> 

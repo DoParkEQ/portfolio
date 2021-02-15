@@ -16,11 +16,11 @@ const useStyles = createUseStyles((theme) => ({
     margin: '0.2rem',
   },
 }))
-const Chip = ({ className }) => {
+const Chip = ({ className, label }) => {
   const classes = useStyles()
   return (
     <div className={clsx([classes.chip],className)}>
-      <Text className={classes.text} typeface='Lato' variant='body'>locked 🔒</Text>
+          <Text className={classes.text} typeface='Lato' variant='body'>{label}</Text>
     </div>
   )
 }
