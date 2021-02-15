@@ -6,6 +6,8 @@ import Text from './Text'
 import { createUseStyles } from 'react-jss'
 import clsx from 'clsx'
 import { useImage, useWindowDimensions } from './hooks'
+import Chip from './Chip'
+
 
 const minWidth = 576
 
@@ -101,7 +103,7 @@ const WorkCard = ({ duration, isActive, data, onHover }) => {
         <div className={classes.subContainer}>
           <Text className={classes.hiddenText} variant='subtitle' typeface='Lato'>{tagline}</Text>
           <Text className={clsx([classes.hiddenText],[classes.date])} variant='body' typeface='Lato'>{date}</Text>
-          {locked && <Text className={classes.hiddenText} style={{ color: '#0075EE' }} typeface='Lato'>This post is currently locked 🔒</Text>}
+          {locked && <Chip className={classes.hiddenText}/>}
         </div>
       </Col>
       <Col style={{ padding: 0 }} sm={8} md={8}>
@@ -121,7 +123,7 @@ const WorkCard = ({ duration, isActive, data, onHover }) => {
         </Col>  
         <Col style={{ padding: 0 }} sm={12}>
           <div >
-            {locked && <Text style={{ color: '#0075EE' }} typeface='Lato'>This post is currently locked 🔒</Text>}
+            {locked && <Chip/>}
           </div>
         </Col>
       </Row> 

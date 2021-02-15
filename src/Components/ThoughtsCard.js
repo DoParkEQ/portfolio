@@ -4,14 +4,16 @@ import { createUseStyles } from 'react-jss'
 import { Col } from 'react-grid-system'
 import { Link } from 'react-router-dom'
 import Text from './Text'
+import Chip from './Chip'
 import clsx from 'clsx'
 
 
 const useStyles = createUseStyles((theme) => ({
   text: {
-    margin: '0.5rem',
+    margin: '0.2rem',
   },
   container: {
+    height: 100,
     margin: '12px 0px',
     borderRadius: 10,
     border: `solid 1px ${theme.color.secondary[200]}`,
@@ -25,19 +27,40 @@ const useStyles = createUseStyles((theme) => ({
   date: {
     color: theme.color.secondary[500],
   },
+  link: {
+    textDecoration: 'none',
+    color: theme.color.secondary[900],
+  },
+  chip: {
+    display: 'inline',
+    padding: '2px 12px',
+    backgroundColor: theme.color.system.locked,
+    borderRadius: 10,
+  },
+  titleContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
 }))
-  
+
 const ThoughtsCard = ({ data }) => {
 
-  const { title, date, slug, category } = data 
   const classes = useStyles()
+  const { title, date, slug, category, status } = data 
+  const locked = status.includes('locked')
+  console.log(status)
   return (
    
     <Col style={{ padding: 16 }} className={classes.container} sm={12}>
-      <Link to={`${category[0]}/${slug}`}>
+      <Link className={classes.link} to={locked ? '/thoughts' : `${category[0]}/${slug}`}>
         <div>
-          <Text className={clsx([classes.text], [classes.date])} variant='body' typeface='Open Sans'>{date}</Text>
-          <Text className={classes.text} variant='subtitle'>{title}</Text>
+          <div className={classes.titleContainer}>
+            <Text className={clsx([classes.text], [classes.date])} variant='body' typeface='Lato'>{date}</Text>
+            {locked && <Chip/>}
+          </div>
+          <div>
+            <Text className={classes.text} variant='subtitle'>{title}</Text>  
+          </div>
         </div>
       </Link>
     </Col>

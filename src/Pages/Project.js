@@ -3,10 +3,24 @@ import React, { useState, useEffect } from 'react'
 import { NotionRenderer } from 'react-notion'
 import axios from 'axios'
 import '../styles/notion.css'
+import Loader from '../components/Loader'
+import { createUseStyles } from 'react-jss'
+
+
+const useStyles = createUseStyles(() => ({
+  root: {
+    width: '100%',
+    height: 'calc(100vh - 129px - 95px)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+}))
+
 
 
 const ProjectNotion = ({ match }) => {
-
+  const classes = useStyles()
   const { slug } = match.params 
   const [blockMap, setBlockMap] = useState(null)
   const [blogId, setBlogId] = useState(null)
@@ -41,12 +55,17 @@ const ProjectNotion = ({ match }) => {
     }
   },[blockMap])
   
-  return !!blockMap && (
+  return blockMap ? (
     <div>
       <NotionRenderer fullPage blockMap={blockMap} />
     </div>
+  ) : (
+    <div className={classes.root}>
+      <Loader/>
+    </div>
   )
 }
+
 
 ProjectNotion.propTypes = {
   match: PropTypes.shape({
