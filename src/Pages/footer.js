@@ -32,7 +32,7 @@ const Footer = () => {
   return (
     <div className={classes.footer}>
       <div className="copyright">
-        <Text vartiant='body' typeface='Open Sans'>
+        <Text vartiant='body' typeface='Lato'>
             🎨 and 👨‍💻 by Do Park
           <br />© 2020
         </Text>

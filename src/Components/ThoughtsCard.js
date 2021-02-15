@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { createUseStyles } from 'react-jss'
-import { Col, Row } from 'react-grid-system'
+import { Col } from 'react-grid-system'
+import { Link } from 'react-router-dom'
 import Text from './Text'
 import clsx from 'clsx'
 
@@ -9,14 +10,6 @@ import clsx from 'clsx'
 const useStyles = createUseStyles((theme) => ({
   text: {
     margin: '0.5rem',
-  },
-  textContainer: {
-    opacity: isActive => isActive ? 1.0 : 0.2,
-    transition: 'all 0.4s ease-in-out',
-  },
-  hiddenText: {
-    opacity: isActive => isActive ? 1 : 0,
-    transition: 'all 0.4s ease-in-out',
   },
   container: {
     margin: '12px 0px',
@@ -34,17 +27,19 @@ const useStyles = createUseStyles((theme) => ({
   },
 }))
   
-const ThoughtsCard = ({ isActive, data }) => {
+const ThoughtsCard = ({ data }) => {
 
-  const { title, date, slug, status, category, tagline } = data 
-  const classes = useStyles(isActive)
+  const { title, date, slug, category } = data 
+  const classes = useStyles()
   return (
    
     <Col style={{ padding: 16 }} className={classes.container} sm={12}>
-      <Text className={clsx([classes.text],[classes.date])} variant='body' typeface='Open Sans'>{date}</Text>
-      <Text className={classes.text} variant='subtitle'>{title}</Text>
-      {/* <Text className={classes.text} variant='body' typeface='Open Sans'>{tagline}</Text> */}
-      {/* <Text className={classes.text} variant='button' typeface='Open Sans'>Read more</Text> */}
+      <Link to={`${category[0]}/${slug}`}>
+        <div>
+          <Text className={clsx([classes.text], [classes.date])} variant='body' typeface='Open Sans'>{date}</Text>
+          <Text className={classes.text} variant='subtitle'>{title}</Text>
+        </div>
+      </Link>
     </Col>
    
   )
@@ -63,12 +58,7 @@ ThoughtsCard.propTypes = {
     tagline: PropTypes.string,
     title: PropTypes.string,
   }),
-  duration: PropTypes.number,
-  isActive: PropTypes.bool,
-  onHover: PropTypes.func,
-  slug: PropTypes.string.isRequired,
-  status: PropTypes.array.isRequired,
-  title: PropTypes.string.isRequired,
+  onHover: PropTypes.func.isRequired,
 }
 
 export default ThoughtsCard

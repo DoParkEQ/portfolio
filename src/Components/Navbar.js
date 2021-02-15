@@ -6,7 +6,7 @@ const useStyles = createUseStyles((theme) => ({
   navlink: {
     margin: 0,
     padding: 0,
-    fontFamily: 'Open Sans',
+    fontFamily: 'Lato',
     fontSize: 14,
   },
   navigation: {
@@ -14,26 +14,29 @@ const useStyles = createUseStyles((theme) => ({
     justifyContent: 'space-between',
     width: '100%',
     '& h3': {
+      filter: 'hue-rotate(0%)',
       margin: '0px 0px',
       width: '100%',
-      fontWeight: 800,
+      fontWeight: 900,
       background: `linear-gradient(
               217deg,
-              rgba(255, 214, 166, 0.8),
+              rgba(255, 182, 139, 1.0),
               rgba(255, 0, 0, 0) 70.71%
             ),
             linear-gradient(
               127deg,
-              rgba(167, 153, 255, 0.8),
+              rgba(167, 153, 255, 1.0),
               rgba(0, 255, 0, 0) 70.71%
             ),
             linear-gradient(
               336deg,
-              rgba(152, 218, 255, 0.8),
+              rgba(73, 200, 207, 1.0),
               rgba(0, 0, 255, 0) 70.71%
             )`,
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
+      animation: '$hue-rotate 3s infinite',
+      transitionTimingFunction: 'ease-in-out',
     },
     '& .navlinks': {
       display: 'flex',
@@ -54,6 +57,11 @@ const useStyles = createUseStyles((theme) => ({
         },
       },
     },
+  },
+  '@keyframes hue-rotate': {
+    '0%': { filter: 'hue-rotate(360deg)' },
+    '50%': { filter: 'hue-rotate(320deg)' },
+    '100%': { filter: 'hue-rotate(360deg)' },
   },
 }))
 

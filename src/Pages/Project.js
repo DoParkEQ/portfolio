@@ -25,13 +25,23 @@ const ProjectNotion = ({ match }) => {
       axios.get(
         `https://notion-api.splitbee.io/v1/page/${blogId}`,
       ).then(res => {
+        console.log(res.data)
         setBlockMap(res.data)
       })
     }
   },[blogId])
   
+  useEffect(() => {
+    if (blockMap!==null) {
+      const videos = document.body.querySelectorAll('.notion-text')
+      // .forEach(item => 
+      //   console.log(item.contentWindow.document.body.querySelectorAll('video'))
+      //   )
+      console.log(videos)
+    }
+  },[blockMap])
   
-  return blockMap !== null && (
+  return !!blockMap && (
     <div>
       <NotionRenderer fullPage blockMap={blockMap} />
     </div>

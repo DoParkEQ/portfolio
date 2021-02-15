@@ -5,7 +5,11 @@ import WorkCard from './WorkCard'
 import SideProjectCard from './SideProjectCard'
 import ThoughtsCard from './ThoughtsCard'
 
-const duration = 0.3
+const duration = {
+  '/work': 0.3,
+  '/side-project': 0,
+  '/thoughts': 0.3,
+}
 
 const getCard = (type) => ({
   '/work': WorkCard, 
@@ -42,41 +46,34 @@ const Gallery = ({ posts, currentPath }) => {
   const [isTransition, setIsTransition] = useState(false)
   const filteredPosts = posts.filter(({ category, status }) => category[0] === currentPath && status.includes('live'))
   const formattedPosts = formatPosts(filteredPosts, gridNum[currentPath])
-  
+
   const Card = getCard(currentPath)
   
-  const onHover = (num) => {
-    if(!isTransition && currentItem !== num){
-      setCurrentItem(num)
+  const onHover = (id) => {
+    if(!isTransition && currentItem !== id){
+      setCurrentItem(id)
       setIsTransition(true)
     }  
   }    
 
   useEffect(() => {
     if (isTransition) { 
-      const timer = setTimeout(() => setIsTransition(false), duration * 1000)
+      console.log(duration[currentPath])
+      const timer = setTimeout(() => setIsTransition(false), duration[currentPath] * 1000)
       return () => clearTimeout(timer)    
     }
   },[isTransition])
 
   return (
     <Container fluid style={{ width: '100%', padding: 16 }}>
-      {/* {formattedPosts.map(post => 
-        post.map((data, index) =>
-          <div onMouseOver={() => onHover(index)}>
-            <Card key={index}
-              isActive={index === currentItem ? true : false}
-              duration={duration}
-              data={data} />
-          </div>)
-      )} */}
       {formattedPosts.map(post => 
         <Row style={{ width: '100%', margin: 0, boxSizing: 'border-box' }}>
           {post.map((data, index) =>
             <Card
+              key={index}
               index={index}
               isActive={data.id === currentItem ? true : false}
-              duration={duration}
+              duration={duration[currentPath]}
               data={data}
               onHover={onHover}/>,
           )}

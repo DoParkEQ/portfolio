@@ -1,6 +1,6 @@
 @import url(//fonts.googleapis.com/css2?family=Martel:wght@300;400;600;700;800&display=swap);
 @import url(//fonts.googleapis.com/css2?family=Open + Sans:wght@300;400;600;700&display=swap);
-
+@import url(//fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap);
 h1 {
   font-size: 96px;
   font-weight: 300;
@@ -53,7 +53,7 @@ p {
 body {
   background: #fff;
   height: 100%;
-  font-family: "Martel", "Open Sans", serif;
+  font-family: "Martel", "Open Sans", "Lato", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

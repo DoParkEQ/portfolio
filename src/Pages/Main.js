@@ -9,7 +9,6 @@ import axios from 'axios'
 import Gallery from '../components/Gallery'
 
 
-
 const useStyles = createUseStyles(() => ({
   root: {
     maxWidth: 1280,
@@ -25,7 +24,6 @@ const useStyles = createUseStyles(() => ({
     padding: '20px 16px',
   },
   logo: {
-    margin: '0px 8px',
     '& img': {
       width: 40,
       height: 40,
@@ -73,7 +71,7 @@ const Main = () => {
         <div className={classes.content}>
           <div className={classes.container}>
             <Gallery posts={posts} currentPath={pathname}/>
-            <Route path={['/work/:slug', '/side-projects/:slug', '/thoughts/:slug']} component={ProjectPage} />
+            <Route path={['/work/:slug', '/side-project/:slug', '/thoughts/:slug']} component={ProjectPage} />
           </div>
         </div>
         <div className={classes.footerContainer}>

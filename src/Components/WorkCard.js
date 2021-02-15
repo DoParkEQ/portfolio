@@ -1,17 +1,19 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { Row, Col } from 'react-grid-system'
 import Text from './Text'
 import { createUseStyles } from 'react-jss'
 import clsx from 'clsx'
-import { useImage } from './hooks'
+import { useImage, useWindowDimensions } from './hooks'
 
-const useStyles = createUseStyles((theme) =>  ({
+const minWidth = 576
+
+const useStyles = createUseStyles((theme) => ({
   root: ({ isActive, duration }) => ({
     width: '100%',
     padding: 0,
-    height: isActive ? 300 : 80,
+    height: isActive ? 311 : 91,
     transition: `all ${duration}s ease-in-out`,
   }),
   text: {
@@ -20,25 +22,22 @@ const useStyles = createUseStyles((theme) =>  ({
   textContainer: ({ isActive, duration }) => ({
     opacity: isActive ? 1.0 : 0.2,
     transition: `all ${duration}s ease-in-out`,
-  
   }),
   hiddenText: ({ isActive, duration }) => ({
     opacity: isActive ? 1 : 0,
     transition: `all ${duration}s ease-in-out`,
   }),
   image: ({ isActive, duration }) => ({
-    // backgroundImage: `url(${image})`,
-    // backgroundSize: 'cover',
     objectFit: 'cover',
     opacity: isActive ? 1.0 : 0.2,
-    width: '100%',
     height: isActive ? 300 : 80,
+    width: '100%',
     backgroundColor: theme.color.secondary[400],
     borderRadius: 10,
     transition: `all ${duration}s ease-in-out`,
     boxShadow: theme.shadow[20],
   }),
-  skeleton: ({ isActive, duration }) => ({
+  skeleton: ({ isActive }) => ({
     backgroundColor: theme.color.secondary[100],
     opacity: isActive ? 1.0 : 0.2,
     width: '100%',
@@ -59,54 +58,74 @@ const useStyles = createUseStyles((theme) =>  ({
     '50%': { backgroundColor: theme.color.secondary[300] },
     '100%': { backgroundColor: theme.color.secondary[400] },
   },
+  test: {
+    border: 'solid 1px black',
+  },
+  rootMobile: {
+    width: '100%',
+    padding: 0,
+  },
+  imageMobile: ({ duration }) => ({
+    objectFit: 'cover',
+    height: 200,
+    width: '100%',
+    backgroundColor: theme.color.secondary[400],
+    borderRadius: 10,
+    transition: `all ${duration}s ease-in-out`,
+    boxShadow: theme.shadow[20],
+  }),
+  skeletonMobile: {
+    backgroundColor: theme.color.secondary[100],
+    width: '100%',
+    height: 200,
+    borderRadius: 10,
+    boxShadow: theme.shadow[20],
+    animation: '$shine 1.6s infinite',
+    transitionTimingFunction: 'ease-in-out',
+  },
 }))
 
 const WorkCard = ({ duration, isActive, data, onHover }) => {
 
   const { title, date, client, tagline, slug, status, category, id, image } = data
   const [isLoading, imgUrl] = useImage(image)
-  console.log(isLoading, imgUrl)
+  const { width } = useWindowDimensions()
   const locked = status.includes('locked')
   const classes = useStyles({ isActive, duration })
-  
-  // useEffect(() => {
-  //   const loadImage = (url) => {
-  //     return new Promise((resolve, reject) => {
-  //       const loadImg = new Image();
-  //       loadImg.src = url;
-  //       loadImg.onload = () => resolve(url);
-  //       loadImg.onerror = (err) => reject(err);
-  //     });
-  //   };
 
-  //   loadImage(image)
-  //     .then((res) => {
-  //       setImgURL(res);
-  //     })
-  //     .catch((err) => console.log("Failed to load images", err));
-  // }, []);
-
-  return (   
-    <Row style={{ margin: '12px 0px' }} className={classes.root} onMouseOver={()=>onHover(id)}>
-      <Col style={{ padding: 0 }} className={classes.textContainer} sm={4}>
+  return width > minWidth ? (   
+    <Row style={{ margin: '12px 0px' }} className={classes.root} onMouseOver={() => onHover(id)}>
+      <Col style={{ padding: 0 }} className={classes.textContainer} sm={4} md={4}>
         <Text className={classes.text} variant='subtitle'>{client}</Text>
         <Text className={classes.text} variant='h4'>{title}</Text>
         <div className={classes.subContainer}>
-          <Text className={classes.hiddenText} variant='body' typeface='Open Sans'>{tagline}</Text>
-          <Text className={clsx([classes.hiddenText],[classes.date])} variant='body' typeface='Open Sans'>{date}</Text>
-          {locked && <Text className={classes.hiddenText} style={{ color: '#0075EE' }} typeface='Open Sans'>This post is currently locked 🔒</Text>}
+          <Text className={classes.hiddenText} variant='subtitle' typeface='Lato'>{tagline}</Text>
+          <Text className={clsx([classes.hiddenText],[classes.date])} variant='body' typeface='Lato'>{date}</Text>
+          {locked && <Text className={classes.hiddenText} style={{ color: '#0075EE' }} typeface='Lato'>This post is currently locked 🔒</Text>}
         </div>
       </Col>
-      <Col style={{ padding: 0 }} sm={8}>
+      <Col style={{ padding: 0 }} sm={8} md={8}>
         <Link to={locked ? '/work' : `${category[0]}/${slug}`}>
-          { isLoading ? <div className={classes.skeleton} /> : <img className={classes.image} src={imgUrl} />}
+          {isLoading ? <div className={classes.skeleton} /> : <img className={classes.image} src={imgUrl} />}
         </Link> 
       </Col>
-    </Row>
-    
-    
-  )
-  
+    </Row>)
+    : (
+      <Row style={{ margin: '12px 0px' }} className={classes.rootMobile} onMouseOver={()=>onHover(id)}>
+        <Col style={{ padding: 0 }} sm={12}>
+          <Text variant='h6' className={classes.text}>{title}</Text>
+          <Text variant='subtitle' typeface='Lato'>{tagline}</Text>
+          <Link to={locked ? '/work' : `${category[0]}/${slug}`}>
+            {isLoading ? <div className={classes.skeletonMobile} /> : <img className={classes.imageMobile} src={imgUrl} />}
+          </Link> 
+        </Col>  
+        <Col style={{ padding: 0 }} sm={12}>
+          <div >
+            {locked && <Text style={{ color: '#0075EE' }} typeface='Lato'>This post is currently locked 🔒</Text>}
+          </div>
+        </Col>
+      </Row> 
+    )
 }
 
 WorkCard.propTypes = {

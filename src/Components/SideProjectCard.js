@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { createUseStyles } from 'react-jss'
-import { Col, Row } from 'react-grid-system'
-import Text from './Text'
-import clsx from 'clsx'
+import { Col } from 'react-grid-system'
+import { Link } from 'react-router-dom'
 import { useImage } from './hooks'
 
 const useStyles = createUseStyles((theme) => ({
@@ -19,24 +18,17 @@ const useStyles = createUseStyles((theme) => ({
   text: {
     margin: '0.5rem',
   },
-  textContainer: {
-    opacity: ({ isActive }) => isActive ? 1.0 : 0.2,
-    transition: 'all 0.4s ease-in-out',
-  },
-  hiddenText: {
-    opacity: ({ isActive }) => isActive ? 1 : 0,
-    transition: 'all 0.4s ease-in-out',
-  },
   container: {
+    filter: 'grayscale(100%)',
     width: '100%',
     height: 250,
     borderRadius: 10,
     boxShadow: theme.shadow[10],
     '&:hover': {
       boxShadow: theme.shadow[30],
-      transform: 'scale(1.01)',
+      filter: 'grayscale(0%)',
     },
-    transition: 'all 0.2s ease-in-out',
+    transition: 'all 0.2s linear',
   },
   skeleton: {
     backgroundColor: theme.color.secondary[400],
@@ -61,34 +53,29 @@ const doubleSized = ['side-project-1','side-project-6']
 
 const SideProjectCard = ({ isActive, data }) => {
 
-  const { title, date, slug, status, image } = data
+  const { category, slug, image } = data
   const [isLoading, imgUrl] = useImage(image)
-  const classes = useStyles({ isActive, image })
+  const classes = useStyles(isActive)
   const colSize = doubleSized.includes(slug) ? 6 : 3
 
   return (
-    <Link to={`${category[0]}/${slug}`}>
-      <Col style={{ padding: 12 }} sm={colSize}>
-        {isLoading ? <div className={classes.skeleton} /> :  <img className={classes.container} src={imgUrl}/>}
-      </Col>
-    </Link>
-
+    <Col style={{ padding: 12 }} sm={colSize}>
+      {isLoading ? <div className={classes.skeleton} /> :
+        <Link to={`${category[0]}/${slug}`}>
+          <img className={classes.container} src={imgUrl} />
+        </Link>}
+    </Col>
   )
 }
 
 SideProjectCard.propTypes = {
   data: PropTypes.shape({
-    category: PropTypes.array,
-    client: PropTypes.string,
-    date: PropTypes.string,
-    id: PropTypes.string,
-    image: PropTypes.string,
-    slug: PropTypes.string,
-    status: PropTypes.array,
-    tagline: PropTypes.string,
-    title: PropTypes.string,
+    category: PropTypes.array.isRequired,
+    image: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
   }),
-  isActive: PropTypes.bool,
+  isActive: PropTypes.bool.isRequired,
+  onHover: PropTypes.func.isRequired,
 }
 
 export default SideProjectCard
