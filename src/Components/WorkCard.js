@@ -86,8 +86,8 @@ const useStyles = createUseStyles((theme) => ({
     transitionTimingFunction: 'ease-in-out',
   },
   titleContainer: {
-      display: 'flex',
-      justifyContent: 'space-between',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
 }))
 
