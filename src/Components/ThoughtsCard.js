@@ -13,7 +13,6 @@ const useStyles = createUseStyles((theme) => ({
     margin: '0.2rem',
   },
   container: {
-    height: 100,
     margin: '12px 0px',
     borderRadius: 10,
     border: `solid 1px ${theme.color.secondary[200]}`,
