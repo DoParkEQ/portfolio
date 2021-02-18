@@ -33,8 +33,8 @@ const Footer = () => {
     <div className={classes.footer}>
       <div className="copyright">
         <Text vartiant='body' typeface='Lato'>
-            🎨 and 👨‍💻 by Do Park
-          <br />© 2020
+            👨‍💻 and 💅 by Do Park
+          <br />© 2021
         </Text>
         
       </div>

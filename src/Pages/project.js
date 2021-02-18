@@ -6,6 +6,8 @@ import '../styles/notion.css'
 import Loader from '../components/Loader'
 import { createUseStyles } from 'react-jss'
 import Modal from 'react-modal'
+import { isMobile } from 'react-device-detect'
+
 
 const useStyles = createUseStyles(() => ({
   root: {
@@ -39,7 +41,10 @@ const customStyles = {
     
   },
   content: {
-    inset: '50% auto auto 50%',
+    top: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    left: '50%',
     border: 'none',
     padding: 0,
     overflow: 'hidden',
@@ -56,6 +61,7 @@ const ProjectNotion = ({ match }) => {
   const [blogId, setBlogId] = useState(null)
   const [openModal, setOpenModal] = useState(false)
   const [imgSrc, setImgSrc] = useState('')
+  
   axios.get(
     `https://notion-api.splitbee.io/v1/table/${process.env.REACT_APP_NOTION_ID}`,
   ).then(res => {
@@ -79,11 +85,10 @@ const ProjectNotion = ({ match }) => {
     const x = e.clientX
     const y = e.clientY
     const element = document.elementFromPoint(x, y)
-    if (element.tagName === 'IMG') {
+    if (element.tagName === 'IMG' && !isMobile) {
       setOpenModal(true)
       setImgSrc(element.src)
     }
-
   }
   const handleCloseModal = () => {
     setOpenModal(false)
@@ -100,7 +105,7 @@ const ProjectNotion = ({ match }) => {
           <img style={{ borderRadius: 10, maxWidth: '80vw' }} src={imgSrc} />
         </div>
       </Modal>
-      <NotionRenderer fullPage blockMap={blockMap} onClick={() => console.log('clicked')}/>
+      <NotionRenderer fullPage blockMap={blockMap}/>
     </div>
   ) : (
     <div className={classes.root}>

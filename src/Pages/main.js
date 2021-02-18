@@ -22,6 +22,9 @@ const useStyles = createUseStyles(() => ({
   },
   header: {
     padding: '20px 16px',
+    '@media (max-width: 576px)': {
+      padding: 0,
+    },
   },
   logo: {
     '& img': {

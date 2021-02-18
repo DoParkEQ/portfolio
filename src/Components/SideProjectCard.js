@@ -51,15 +51,14 @@ const useStyles = createUseStyles((theme) => ({
 
 const doubleSized = ['side-project-1','side-project-6']
 
-const SideProjectCard = ({ isActive, data }) => {
+const SideProjectCard = ({ isActive, data, noPadding }) => {
 
   const { category, slug, image } = data
   const [isLoading, imgUrl] = useImage(image)
   const classes = useStyles(isActive)
   const colSize = doubleSized.includes(slug) ? 6 : 3
-
   return (
-    <Col style={{ padding: 12 }} sm={colSize}>
+    <Col style={{ padding: noPadding ? '12px 0px' : '12px' }} sm={colSize}>
       {isLoading ? <div className={classes.skeleton} /> :
         <Link to={`${category[0]}/${slug}`}>
           <img className={classes.container} src={imgUrl} />
@@ -76,6 +75,7 @@ SideProjectCard.propTypes = {
   }),
   isActive: PropTypes.bool.isRequired,
   onHover: PropTypes.func.isRequired,
+  noPadding: PropTypes.bool.isRequired,
 }
 
 export default SideProjectCard

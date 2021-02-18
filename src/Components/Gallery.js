@@ -4,6 +4,7 @@ import { Container,Row } from 'react-grid-system'
 import WorkCard from './WorkCard'
 import SideProjectCard from './SideProjectCard'
 import ThoughtsCard from './ThoughtsCard'
+import { useWindowDimensions } from './hooks'
 
 const duration = {
   '/work': 0.3,
@@ -46,7 +47,10 @@ const Gallery = ({ posts, currentPath }) => {
   const [isTransition, setIsTransition] = useState(false)
   const filteredPosts = posts.filter(({ category, status }) => category[0] === currentPath && status.includes('live'))
   const formattedPosts = formatPosts(filteredPosts, gridNum[currentPath])
-
+  const { width } = useWindowDimensions()
+  const minWidth = 576
+  const noPadding = width < minWidth
+  console.log(noPadding)
   const Card = getCard(currentPath)
   
   const onHover = (id) => {
@@ -65,7 +69,7 @@ const Gallery = ({ posts, currentPath }) => {
   },[isTransition])
 
   return (
-    <Container fluid style={{ width: '100%', padding: 16 }}>
+    <Container fluid style={{ width: '100%', padding: noPadding ? 0 : 16 }}>
       {formattedPosts.map(post => 
         <Row style={{ width: '100%', margin: 0, boxSizing: 'border-box' }}>
           {post.map((data, index) =>
@@ -75,6 +79,7 @@ const Gallery = ({ posts, currentPath }) => {
               isActive={data.id === currentItem ? true : false}
               duration={duration[currentPath]}
               data={data}
+              noPadding={noPadding}
               onHover={onHover}/>,
           )}
         </Row>,
