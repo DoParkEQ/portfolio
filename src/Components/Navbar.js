@@ -89,13 +89,13 @@ const Navbar = () => {
         >
                 Side projects
         </NavLink>
-        <NavLink
+        {/* <NavLink
           className={classes.navlink}
           to="/thoughts"
           activeClassName="active"
         >
                 Thoughts
-        </NavLink>
+        </NavLink> */}
       </div>
     </div>
   )
