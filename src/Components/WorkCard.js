@@ -100,7 +100,7 @@ const WorkCard = ({ duration, isActive, data, onHover }) => {
   const classes = useStyles({ isActive, duration })
 
   return width > minWidth ? (   
-    <Row style={{ margin: '12px 0px' }} className={classes.root} onMouseOver={() => onHover(id)}>
+    <Row style={{ margin: '12px 0px' }} className={classes.root} onMouseOver={() => onHover(slug)}>
       <Col style={{ padding: 0 }} className={classes.textContainer} sm={4} md={4}>
         <Text className={classes.text} style={{ color: '#898989' }} variant='subtitle'>{client}</Text>
         <Text className={classes.text} variant='h4'>{title}</Text>
@@ -137,7 +137,6 @@ const WorkCard = ({ duration, isActive, data, onHover }) => {
 }
 
 WorkCard.propTypes = {
-  category: PropTypes.array.isRequired,
   data: PropTypes.shape({
     category: PropTypes.array,
     client: PropTypes.string,

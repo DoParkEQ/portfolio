@@ -76,6 +76,7 @@ const ProjectNotion = ({ match }) => {
       axios.get(
         `https://notion-api.splitbee.io/v1/page/${blogId}`,
       ).then(res => {
+        console.log(Object.keys(res.data).length)
         setBlockMap(res.data)
       })
     }
